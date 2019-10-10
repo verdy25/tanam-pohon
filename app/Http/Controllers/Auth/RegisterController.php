@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Masyarakat;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -80,10 +81,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        $user = new User;
+        $user->name =  $data['name'];
+        $user->email = $data['email'];
+        $user->role_id = 3;
+        $user->password =  bcrypt($data['password']);
+        $user->save();
+
+        Masyarakat::create([
+            'user_id' => $user->id,
+            'nama' => $data['name'],
+            'email' => $data['email']
         ]);
     }
 }

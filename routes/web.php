@@ -11,23 +11,33 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
-
-Route::get('/welcome', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/admin', function () {
-    return view('admin');
-})->name('adminpage');
+Route::group(['middleware' => ['auth', 'checkRole:3,2,1']],function(){
+    Route::get('/', 'HomeController@index');
+});
 
-Route::get('admin/login', 'Auth\AdminLoginController@showLoginForm');
-Route::post('admin/login', ['as' => 'admin/login', 'uses' => 'Auth\AdminLoginController@login']);
-Route::get('admin/register', 'Auth\AdminLoginController@showRegisterPage');
-Route::post('admin/register', 'Auth\AdminLoginController@register')->name('admin.register');
+//user
+Route::group(['middleware' => ['auth', 'checkRole:3']],function(){
+    Route::get('/minta', 'PermintaanController@index');
+    Route::get('/minta/buat', 'PermintaanController@create');
+    Route::post('/minta', 'PermintaanController@store');
+});
+
+//persemaian
+Route::group(['middleware' => ['auth', 'checkRole:2']],function(){
+    Route::resource('/bibit', 'BibitController');
+});
+
+//admin
+Route::group(['middleware' => ['auth', 'checkRole:1,2']],function(){
+    Route::get('/permintaan', 'PermintaanController@admin');
+    Route::get('/permintaan/{permintaan}/status', 'PermintaanController@edit_status');
+    Route::put('/permintaan/{permintaan}', 'PermintaanController@update_status');
+});

@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>dizzi</title>
+    <title>Tanampohon</title>
     <link rel="icon" href="img/favicon.png" />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
@@ -32,7 +32,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="index.html">
+                        <a class="navbar-brand" href="/">
                             {{-- <img src="{{asset('img/logo.png')}}" alt="logo" /> --}}
                             <h3 class="text-white">TAPO</h3>
                         </a>
@@ -48,12 +48,23 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="index.html">Home</a>
                                 </li>
+                                @if (auth()->user()->role_id == 3)
                                 <li class="nav-item">
-                                    <a class="nav-link" href="about.html">About</a>
+                                    <a class="nav-link" href="#">About</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="services.html">Informasi Bibit</a>
+                                    <a class="nav-link" href="#">Informasi Bibit</a>
                                 </li>
+                                <li class="nav-item">
+                                <a class="nav-link" href="/minta">Permintaaku</a>
+                                </li>
+                                @endif
+                                {{-- @if (auth()->user()->role_id == 2)
+                                <li class="nav-item">
+                                    <a class="nav-link" href="about.html">Dashboard bibit</a>
+                                </li>
+                                @endif --}}
+
                                 {{-- @if (Route::has('login'))
                                 @auth
                                 <li class="nav-item">
