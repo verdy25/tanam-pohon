@@ -48,7 +48,16 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="index.html">Home</a>
                                 </li>
-                                @if (auth()->user()->role_id == 3)
+                                @guest
+                                @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                                {{-- <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li> --}}
+                                @endif
+                                @else
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">About</a>
                                 </li>
@@ -56,42 +65,8 @@
                                     <a class="nav-link" href="#">Informasi Bibit</a>
                                 </li>
                                 <li class="nav-item">
-                                <a class="nav-link" href="/minta">Permintaaku</a>
+                                    <a class="nav-link" href="/minta">Permintaaku</a>
                                 </li>
-                                @endif
-                                {{-- @if (auth()->user()->role_id == 2)
-                                <li class="nav-item">
-                                    <a class="nav-link" href="about.html">Dashboard bibit</a>
-                                </li>
-                                @endif --}}
-
-                                {{-- @if (Route::has('login'))
-                                @auth
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ url('/dashboard') }}">Dashboard</a>
-                                </li>
-                                @else
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">Masuk</a>
-                                </li>
-                                @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">Daftar</a>
-                                </li>
-                                @endif
-                                @endauth
-                                @endif --}}
-                                <!-- Authentication Links -->
-                                @guest
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                                @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                                @endif
-                                @else
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
