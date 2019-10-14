@@ -24,29 +24,29 @@ Auth::routes();
 // 2. persemaian
 // 3. masyarakat
 
-// Route::group(['middleware' => ['auth', 'role:3,2,1']],function(){
-//     Route::get('/', 'HomeController@index');
-// });
+Route::group(['middleware' => ['auth', 'role:3,2,1']],function(){
+    Route::get('/', 'HomeController@index');
+});
 
-// Route::group(['middleware' => ['auth', 'role:3']],function(){
-//     Route::get('/minta', 'PermintaanController@index');
-//     Route::get('/minta/buat', 'PermintaanController@create');
-//     Route::post('/minta', 'PermintaanController@store');
-// });
+Route::group(['middleware' => ['auth', 'role:3']],function(){
+    Route::get('/minta', 'PermintaanController@index');
+    Route::get('/minta/buat', 'PermintaanController@create');
+    Route::post('/minta', 'PermintaanController@store');
+});
 
-// Route::group(['middleware' => ['auth', 'role:2']],function(){
-//     Route::resource('/bibit', 'BibitController');
-// });
+Route::group(['middleware' => ['auth', 'role:2']],function(){
+    Route::resource('/bibit', 'BibitController');
+});
 
-// Route::group(['middleware' => ['auth', 'role:1,2']],function(){
-//     Route::get('/permintaan', 'PermintaanController@admin');
-//     Route::get('/permintaan/{permintaan}/status', 'PermintaanController@edit_status');
-//     Route::put('/permintaan/{permintaan}', 'PermintaanController@update_status');
-// });
+Route::group(['middleware' => ['auth', 'role:1,2']],function(){
+    Route::get('/permintaan', 'PermintaanController@admin');
+    Route::get('/permintaan/{permintaan}/status', 'PermintaanController@edit_status');
+    Route::put('/permintaan/{permintaan}', 'PermintaanController@update_status');
+});
 
-// Route::group(['middleware' => ['auth', 'role:1']], function(){
-//     Route::prefix('lahan')->group(function(){        
-//         Route::resource('/ciri', 'LahanCiriController');
-//         Route::resource('/kondisi', 'LahanKondisiController');
-//     });
-// });
+Route::group(['middleware' => ['auth', 'role:1']], function(){
+    Route::prefix('lahan')->group(function(){        
+        Route::resource('/ciri', 'LahanCiriController');
+        Route::resource('/kondisi', 'LahanKondisiController');
+    });
+});
