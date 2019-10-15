@@ -2,17 +2,18 @@
 
 @section('content')
 
+<style>
+    .breadcrumb {
+        height: 100px;
+    }
+
+    .section_padding {
+        padding-top: 50px;
+    }
+</style>
+
 <!-- breadcrumb start-->
-<section class="breadcrumb bibit_bg align-items-center">
-    <div class="container">
-        <div class="row align-items-center justify-content-between">
-            <div class="col-sm-6">
-                <div class="breadcrumb_tittle">
-                    <h2>Permintaan bibit</h2>
-                </div>
-            </div>
-        </div>
-    </div>
+<section class="breadcrumb ">
 </section>
 <!-- breadcrumb start-->
 
@@ -32,15 +33,25 @@
                                 <label for="penanggungjawab">Nama</label>
                                 <input class="form-control" name="penanggungjawab" id="penanggungjawab" type="text"
                                     onfocus="this.placeholder = ''" onblur="this.placeholder = 'Masukkan nama'"
-                                    placeholder='Masukkan nama'>
+                                    placeholder='Masukkan nama' value="{{old('penanggungjawab')}}">
                             </div>
+                            @error('penanggungjawab')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                            @enderror
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="alamat">Alamat</label>
                                 <input class="form-control" name="alamat" id="alamat" type="text"
                                     onfocus="this.placeholder = ''" onblur="this.placeholder = 'Masukkan alamat'"
-                                    placeholder='Masukkan alamat'>
+                                    placeholder='Masukkan alamat' value="{{old('alamat')}}">
+                                @error('alamat')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -48,7 +59,12 @@
                                 <label for="nik">NIK</label>
                                 <input class="form-control" name="nik" id="nik" type="text"
                                     onfocus="this.placeholder = ''" onblur="this.placeholder = 'Masukkan NIK'"
-                                    placeholder='Masukkan NIK'>
+                                    placeholder='Masukkan NIK' value="{{old('nik')}}">
+                                @error('nik')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -56,7 +72,12 @@
                                 <label for="telp">Nomor HP</label>
                                 <input class="form-control" name="telp" id="telp" type="text"
                                     onfocus="this.placeholder = ''" onblur="this.placeholder = 'Masukkan nomor hp'"
-                                    placeholder='Masukkan nomor hp'>
+                                    placeholder='Masukkan nomor hp' value="{{old('telp')}}">
+                                @error('telp')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-12">
@@ -64,13 +85,19 @@
                                 <label for="tujuan">Tujuan</label>
                                 <textarea class="form-control w-100" name="tujuan" id="tujuan" cols="30" rows="9"
                                     onfocus="this.placeholder = ''" onblur="this.placeholder = 'Masukkan tujuan anda'"
-                                    placeholder='Masukkan tujuan anda'></textarea>
+                                    placeholder='Masukkan tujuan anda' value="{{old('tujuan')}}"
+                                    maxlength="191"></textarea>
+                                @error('tujuan')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="bibit_id">Bibit</label>
-                                <select name="bibit_id" id="bibit_id" class="form-control @error('bibit_id') is-invalid @enderror">
+                                <select name="bibit_id" id="bibit_id" class="form-control">
                                     <option selected> Pilih..</option>
                                     @foreach ($bibits as $bibit)
                                     <option value="{{$bibit->id}}">
@@ -78,6 +105,11 @@
                                     </option>
                                     @endforeach
                                 </select>
+                                @error('bibit_id')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -85,7 +117,12 @@
                                 <label for="jumlah_bibit">Jumlah bibit</label>
                                 <input class="form-control" name="jumlah_bibit" id="jumlah_bibit" type="text"
                                     onfocus="this.placeholder = ''" onblur="this.placeholder = 'Masukkan jumlah bibit'"
-                                    placeholder='Masukkan jumlah bibit'>
+                                    placeholder='Masukkan jumlah bibit' value="{{old('jumlah_bibit')}}">
+                                @error('jumlah_bibit')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-12">
@@ -94,25 +131,71 @@
                                 <input class="form-control" name="luas_lahan" id="luas_lahan" type="text"
                                     onfocus="this.placeholder = ''"
                                     onblur="this.placeholder = 'Masukkan luas lahan (hektar)'"
-                                    placeholder='Masukkan luas lahan (hektar)'>
+                                    placeholder='Masukkan luas lahan (hektar)' value="{{old('luas_lahan')}}">
+                                @error('luas_lahan')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="latitude">Latitude</label>
+                                <input class="form-control" name="latitude" id="latitude" type="text"
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Masukkan latitude'"
+                                    placeholder='Masukkan latitude' value="{{old('latitude')}}">
+                                @error('latitude')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="longitude">Longitude</label>
+                                <input class="form-control" name="longitude" id="longitude" type="text"
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Masukkan longitude'"
+                                    placeholder='Masukkan longitude' value="{{old('longitude')}}">
+                                @error('longitude')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="ktp">Scan KTP</label>
                                 <input class="form-control-file" name="ktp" id="ktp" type="file">
+                                @error('ktp')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="spptpbb">Scan SPPT PBB</label>
                                 <input class="form-control-file" name="spptpbb" id="spptpbb" type="file">
+                                @error('spptpbb')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="permohonan">Scan Surat Permohonan</label>
                                 <input class="form-control-file" name="permohonan" id="permohonan" type="file">
+                                @error('permohonan')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -148,7 +231,7 @@
     </div>
 </section>
 <!-- ================ contact section end ================= -->
-<div class="d-none d-sm-block mb-5 pb-4">
+{{-- <div class="d-none d-sm-block mb-5 pb-4">
     <div id="map" style="height: 480px;"></div>
     <script>
         function initMap() {
@@ -186,5 +269,5 @@ var map = new google.maps.Map(document.getElementById('map'), {
       lat: -12.043333,
       lng: -77.028333
     });
-</script>
+</script> --}}
 @endsection

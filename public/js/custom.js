@@ -18,9 +18,9 @@
     fixedContentPos: false
   });
 
-  $(document).ready(function() {
-    $("select").niceSelect();
-  });
+  // $(document).ready(function() {
+  //   $("select").niceSelect();
+  // });
 
   var client_logo = $(".client_logo_slider");
   if (client_logo.length) {
