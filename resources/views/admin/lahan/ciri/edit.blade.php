@@ -4,7 +4,7 @@
     <div class="container-fluid mt-3">
         <div class="col-lg-10 col-xl-10 col-md-10">
             <h4 class="text-dark mb-4">Ubah ciri-ciri</h4>
-            <form method="POST" action="{{route('ciri.update', $ciri->id)}}">
+            <form method="POST" action="{{route('lahan.ciri.update', $ciri->id)}}">
                 @method('put')
                 @csrf
                 <div class="form-group">

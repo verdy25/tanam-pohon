@@ -18,7 +18,6 @@ class CreateLahanCirisTable extends Migration
             $table->string('ciri');
             $table->string('pertanyaan');
             $table->integer('bobot');
-            $table->timestamps();
         });
     }
 

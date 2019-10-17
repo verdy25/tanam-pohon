@@ -5,12 +5,15 @@
     <div class="container-fluid mt-3">
         <div class="col-lg-10 col-xl-10 col-md-10">
             <h4 class="text-dark mb-4">Masukkan data kondisi lahan</h4>
-            <form method="POST" action="{{route('lahan.kondisi.store')}}">
+            <form method="POST" action="{{route('lahan.store')}}">
                 @csrf
                 <div class="form-group">
                     <label for="kondisi">Kondisi</label>
-                    <input type="text" class="form-control @error('kondisi') is-invalid @enderror" id="kondisi"
-                        placeholder="Masukkan nama kondisi lahan" name="kondisi" value="{{old('kondisi')}}">
+                    <select name="kondisi" id="kondisi" class="form-control">
+                        @foreach ($kondisi as $k)
+                        <option value="{{$k->id}}">{{$k->kondisi}}</option>
+                        @endforeach
+                    </select>
                     @error('kondisi')
                     <div class="invalid-feedback">
                         {{$message}}
@@ -18,14 +21,16 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="penanganan">Penanganan</label>
-                    <input type="text" class="form-control @error('penanganan') is-invalid @enderror" id="penanganan"
-                        placeholder="Masukkan cara menangani lahan" name="penanganan" value="{{old('penanganan')}}">
-                    @error('kondisi')
-                    <div class="invalid-feedback">
-                        {{$message}}
+                    <label for="ciri">Ciri-ciri</label>
+                    <div class="row">
+                        @foreach ($ciri as $c)
+                        <div class="checkbox col-6">
+                            <label><input type="checkbox" name="ciri[]" value="{{$c->id}}">
+                                {{$c->ciri}}</label>
+                        </div>
+                        @endforeach
                     </div>
-                    @enderror
+                    </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Tambah data</button>
             </form>

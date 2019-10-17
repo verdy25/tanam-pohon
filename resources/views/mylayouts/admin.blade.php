@@ -9,8 +9,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Tapo - Persemaian</title>
+    <title>TanamPohon.com</title>
 
+    <link rel="icon" href="{{asset('img/logo.png')}}">
     <!-- Custom fonts for this template-->
     <link href="{{ asset('admin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
@@ -169,6 +170,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="/lahan/kondisi">Kondisi lahan</a>
                         <a class="collapse-item" href="/lahan/ciri">Ciri lahan</a>
+                        <a class="collapse-item" href="/lahan">Kondisi detail lahan</a>
                     </div>
                 </div>
             </li>

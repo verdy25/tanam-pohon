@@ -13,11 +13,13 @@ class CreateCiriKondisiTable extends Migration
      */
     public function up()
     {
-        Schema::create('lahan_ciri_lahan_kondisi', function (Blueprint $table) {
+        Schema::create('lahan_kondisi_detail', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('lahan_kondisi_id')->unsigned();
-            $table->integer('lahan_ciri_id')->unsigned();
-            $table->timestamps();
+            $table->unsignedBigInteger('lahan_kondisi_id');
+            $table->unsignedBigInteger('lahan_ciri_id');
+
+            $table->foreign('lahan_kondisi_id')->references('id')->on('lahan_kondisis');
+            $table->foreign('lahan_ciri_id')->references('id')->on('lahan_ciris');
         });
     }
 
@@ -28,6 +30,6 @@ class CreateCiriKondisiTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lahan_ciri_lahan_kondisi');
+        Schema::dropIfExists('lahan_kondisi_detail');
     }
 }

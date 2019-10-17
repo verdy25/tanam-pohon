@@ -45,9 +45,12 @@ Route::group(['middleware' => 'web'], function () {
     });
 
     Route::group(['middleware' => ['auth', 'role:1']], function () {
-        Route::prefix('lahan')->group(function () {
-            Route::resource('/ciri', 'LahanCiriController');
-            Route::resource('/kondisi', 'LahanKondisiController');
+        Route::prefix('lahan')->name('lahan.')->group(function () {
+            Route::resource('/', 'LahanKondisiDetailController',  ['parameters' => [
+                '' => 'lahan'
+            ]]);
+            Route::resource('/ciri', 'LahanCiriController')->except('show');
+            Route::resource('/kondisi', 'LahanKondisiController')->except('show');
         });
     });
 });

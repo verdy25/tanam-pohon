@@ -4,7 +4,7 @@
 
 <!-- Begin Page Content -->
 <div class="container-fluid" id="app">
-    <a href="{{route('ciri.create')}}" class="btn btn-primary mb-3">Tambah ciri-ciri lahan</a>
+    <a href="{{route('lahan.ciri.create')}}" class="btn btn-primary mb-3">Tambah ciri-ciri lahan</a>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Data ciri-ciri lahan</h6>
@@ -30,8 +30,8 @@
                             <td>{{$c->pertanyaan}}</td>
                             <td>{{$c->bobot}}</td>
                             <td>
-                                <a href="{{route('ciri.edit', $c->id)}}" class="btn btn-primary">Edit</a>
-                                <form class="d-inline" method="POST" action="{{route('ciri.destroy', $c->id)}}">
+                                <a href="{{route('lahan.ciri.edit', $c->id)}}" class="btn btn-primary">Edit</a>
+                                <form class="d-inline" method="POST" action="{{route('lahan.ciri.destroy', $c->id)}}">
                                     @method('DELETE')
                                     @csrf
                                     <button class="btn btn-danger" type="submit">hapus</button>

@@ -17,7 +17,6 @@ class CreateLahanKondisisTable extends Migration
             $table->bigIncrements('id');
             $table->string('kondisi');
             $table->text('penanganan');
-            $table->timestamps();
         });
     }
 

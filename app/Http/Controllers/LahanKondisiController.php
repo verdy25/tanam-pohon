@@ -26,8 +26,7 @@ class LahanKondisiController extends Controller
      */
     public function create()
     {
-        $ciri = LahanCiri::orderBy('ciri', 'asc')->get();
-        return view('admin.lahan.kondisi.create', compact('ciri'));
+        return view('admin.lahan.kondisi.create');
     }
 
     /**
@@ -47,23 +46,7 @@ class LahanKondisiController extends Controller
         $kondisi->kondisi = $request->kondisi;
         $kondisi->penanganan = $request->penanganan;
         $kondisi->save();
-
-        $ciriciri =  $request->ciri;
-        $kondisi->ciri()->attach($ciriciri);
-
         return redirect('/lahan/kondisi')->with('status', 'Kondisi berhasil ditambahkan');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $kondisi = LahanKondisi::findOrFail($id);
-        return view('admin.lahan.kondisi.detail', compact('kondisi'));
     }
 
     /**
@@ -113,8 +96,6 @@ class LahanKondisiController extends Controller
      */
     public function destroy($id)
     {
-        $kondisi = LahanKondisi::find($id);
-        $kondisi->ciri()->sync([]);
         LahanKondisi::destroy($id);
         return redirect('/lahan/kondisi')->with('status', 'ciri-ciri berhasil dihapus');
     }
