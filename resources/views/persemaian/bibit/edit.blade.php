@@ -3,8 +3,8 @@
 <div id="content">
     <div class="container-fluid mt-3">
         <div class="col-lg-10 col-xl-10 col-md-10">
-            <h4 class="text-dark mb-4">Masukkan data bibit</h4>
-            <form method="POST" action="/bibit/{{$bibit->id}}">
+            <h4 class="text-dark mb-4">Ubah data bibit</h4>
+            <form method="POST" action="{{route('bibit.update', $bibit->id)}}">
                 @method('put')
                 @csrf
                 <div class="form-group">
@@ -27,7 +27,7 @@
                     </div>
                     @enderror
                 </div>
-                <button type="submit" class="btn btn-primary">Tambah data</button>
+                <button type="submit" class="btn btn-primary">Simpan data</button>
             </form>
         </div>
     </div>

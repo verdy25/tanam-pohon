@@ -16,6 +16,9 @@ class Permintaan extends Model
         'jumlah_bibit',
         'luas_lahan',
         'status',
+        'latitude',
+        'longitude',
+        'user_id',
         'ktp',
         'spptpbb',
         'permohonan'

@@ -5,7 +5,7 @@
     <div class="container-fluid mt-3">
         <div class="col-lg-10 col-xl-10 col-md-10">
             <h4 class="text-dark mb-4">Masukkan data bibit</h4>
-            <form method="POST" action="/bibit">
+            <form method="POST" action="{{route('bibit.store')}}">
                 @csrf
                 <div class="form-group">
                     <label for="bibit">Bibit</label>

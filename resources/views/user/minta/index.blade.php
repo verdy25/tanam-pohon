@@ -1,22 +1,9 @@
 @extends('mylayouts.app')
 
+@section('breadcrumb')
+@include('mylayouts.breadcrumb.modify')
+@endsection
 @section('content')
-
-<style>
-    .breadcrumb {
-        height: 100px;
-    }
-
-    .section_padding {
-        padding-top: 50px;
-    }
-</style>
-
-<!-- breadcrumb start-->
-<section class="breadcrumb">
-</section>
-<!-- breadcrumb start-->
-
 <!-- ================ contact section start ================= -->
 <section class="contact-section section_padding">
     <div class="container">

@@ -29,13 +29,10 @@ class BibitController extends Controller
 
     public function edit($id){
         $bibit = Bibit::findOrFail($id);
-
         return view('persemaian.bibit.edit', compact('bibit'));
     }
 
     public function update(Request $request, $id){
-        $bibit = Bibit::find($id);
-
         $request->validate([
             'bibit' => 'required',
             'kuota' => 'required|numeric'

@@ -6,7 +6,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <a href="{{url('bibit/create')}}" class="btn btn-primary mb-3">Tambah bibit</a>
+    <a href="{{route('bibit.create')}}" class="btn btn-primary mb-3">Tambah bibit</a>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -30,8 +30,8 @@
                             <td class="col-5">{{$bit->bibit}}</td>
                             <td class="col-3">{{$bit->kuota}}</td>
                             <td class="col-4">
-                                <a href="/bibit/{{$bit->id}}/edit" class="btn btn-primary">Edit</a>
-                                <form class="d-inline" method="POST" action="/bibit/{{$bit->id}}">
+                                <a href="{{route('bibit.edit', $bit->id)}}" class="btn btn-primary">Edit</a>
+                                <form class="d-inline" method="POST" action="{{route('bibit.destroy', $bit->id)}}">
                                     @method('DELETE')
                                     @csrf
                                     <button class="btn btn-danger" type="submit">hapus</button>

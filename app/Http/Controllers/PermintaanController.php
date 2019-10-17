@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Permintaan;
 use App\Bibit;
 use App\StatusPengajuan;
+use Illuminate\Support\Facades\Auth;
 
 class PermintaanController extends Controller
 {
@@ -16,7 +17,7 @@ class PermintaanController extends Controller
      */
     public function index()
     {
-        $permintaan = Permintaan::all();
+        $permintaan = Permintaan::where('user_id', Auth::user()->id)->get();
         return view('user.minta.index', compact('permintaan'));
     }
 
@@ -48,6 +49,8 @@ class PermintaanController extends Controller
             'bibit_id' => 'required',
             'jumlah_bibit' => 'required|numeric',
             'luas_lahan' => 'required|numeric',
+            'latitude' => 'required',
+            'longitude' => 'required',
             'ktp' => 'required|mimes:pdf,jpeg,png,jpg|max:2048',
             'spptpbb' => 'required|mimes:pdf,jpeg,png,jpg|max:2048',
             'permohonan' => 'required|mimes:pdf,jpeg,png,jpg|max:2048'
@@ -73,6 +76,7 @@ class PermintaanController extends Controller
 
         Permintaan::create([
             'penanggungjawab' => $request->penanggungjawab,
+            'user_id' => $request->user()->id,
             'alamat' => $request->alamat,
             'nik' => $request->nik,
             'telp' => $request->telp,
@@ -80,6 +84,8 @@ class PermintaanController extends Controller
             'bibit_id' => $request->bibit_id,
             'jumlah_bibit' => $request->jumlah_bibit,
             'luas_lahan' => $request->luas_lahan,
+            'latitude' =>  $request->latitude,
+            'longitude' =>  $request->longitude,
             'ktp' => $ktp_file,
             'spptpbb' => $spptpbb_file,
             'permohonan' => $permohonan_file,
@@ -97,7 +103,8 @@ class PermintaanController extends Controller
      */
     public function show($id)
     {
-        //
+        $permintaan = Permintaan::findOrFail($id);
+        return view('user.minta.detail', compact('permintaan'));
     }
 
     /**

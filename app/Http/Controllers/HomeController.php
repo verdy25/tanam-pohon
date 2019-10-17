@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -13,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -23,12 +24,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (auth()->user()->role_id == 3) {
+
+        if (Auth::check()) {
+            if (Auth::user()->role_id == 3) {
+                return view('index');
+            } elseif (Auth::user()->role_id == 2) {
+                return view('persemaian.index');
+            } elseif (Auth::user()->role_id == 1) {
+                return view('admin.index');
+            }
+        } else {
             return view('index');
-        } elseif (auth()->user()->role_id == 2) {
-            return view('persemaian.index');
-        } elseif (auth()->user()->role_id == 1) {
-            return view('admin.index');
         }
     }
 }

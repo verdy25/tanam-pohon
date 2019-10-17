@@ -127,62 +127,52 @@
                     <span>Dashboard</span></a>
             </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Masyarakat
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2"
+                    aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-users"></i>
-                    <span>Data</span></a>
+                    <span>Masyarakat</span>
+                </a>
+                <div id="collapsePages2" class="collapse" aria-labelledby="headingPages"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="#">Data</a>
+                        <a class="collapse-item" href="/permintaan">Permintaan bibit</a>
+                        <a class="collapse-item" href="#">Penerima bibit</a>
+                    </div>
+                </div>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="/permintaan">
-                    <i class="fas fa-fw fa-hand-spock"></i>
-                    <span>Permintaan</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Bibit
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-fw fa-hand-spock"></i>
-                    <span>Kuota</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-fw fa-hand-spock"></i>
-                    <span>Jadwal Panen</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Persemaian
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-users"></i>
-                    <span>Petugas</span></a>
+                    <span>Persemaian</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="#">Bibit</a>
+                        <a class="collapse-item" href="#">Jadwal Panen</a>
+                        <a class="collapse-item" href="#">Data petugas</a>
+                    </div>
+                </div>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages3"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Kosultasi</span>
+                </a>
+                <div id="collapsePages3" class="collapse" aria-labelledby="headingPages"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/lahan/kondisi">Kondisi lahan</a>
+                        <a class="collapse-item" href="/lahan/ciri">Ciri lahan</a>
+                    </div>
+                </div>
+            </li>
+
             @endif
 
             <!-- Divider -->

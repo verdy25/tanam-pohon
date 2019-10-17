@@ -15,6 +15,7 @@ class CreatePermintaansTable extends Migration
     {
         Schema::create('permintaans', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
             $table->string('penanggungjawab');
             $table->string('alamat');
             $table->string('nik');
@@ -26,11 +27,12 @@ class CreatePermintaansTable extends Migration
             $table->string('ktp');
             $table->string('spptpbb');
             $table->string('permohonan');
-            $table->double('latitude')->nullable();
-            $table->double('longitude')->nullable();
+            $table->double('latitude');
+            $table->double('longitude');
             $table->unsignedBigInteger('status');
             $table->timestamps();
 
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('bibit_id')->references('id')->on('bibits');
             $table->foreign('status')->references('id')->on('status_pengajuans');
         });

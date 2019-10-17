@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{{ asset('css/slick.css') }}" />
     <!-- style CSS -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+
 </head>
 
 <body>
@@ -46,7 +47,13 @@
                             id="navbarSupportedContent">
                             <ul class="navbar-nav align-items-center">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="index.html">Home</a>
+                                    <a class="nav-link" href="/">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Informasi Bibit</a>
                                 </li>
                                 @guest
                                 @if (Route::has('register'))
@@ -59,13 +66,7 @@
                                 @endif
                                 @else
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">About</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Informasi Bibit</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/minta">Permintaaku</a>
+                                    <a class="nav-link" href="/konseling">Konseling lahan kritis</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -74,6 +75,7 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="/minta">{{__('Permintaanku')}}</a>
                                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
                                             {{ __('Logout') }}
@@ -101,6 +103,7 @@
     </header>
     <!-- Header part end-->
 
+    @yield('breadcrumb')
     @yield('content')
 
     <!-- footer part start-->
