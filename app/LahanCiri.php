@@ -9,7 +9,9 @@ class LahanCiri extends Model
     protected $table = 'lahan_ciris';
     protected $fillable = ['ciri', 'pertanyaan', 'bobot'];
 
-    public function kondisi(){
-        return $this->belongsToMany('App\LahanKondisi');
+    public $timestamps = false;
+
+    public function detail_kondisi(){
+        return $this->hasMany('App\LahanKondisiDetail', 'lahan_ciri_id');
     }
 }

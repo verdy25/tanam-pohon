@@ -9,11 +9,9 @@ class LahanKondisi extends Model
     protected $table = 'lahan_kondisis';
     protected $guarded = [] ;
 
-    public function ciri(){
-        return $this->belongsToMany('App\LahanCiri');
-    }
+    public $timestamps = false;
 
-    public function konsultasi(){
-        return $this->hasMany('App\Konsultasi');
+    public function detail_kondisi(){
+        return $this->hasMany('App\LahanKondisiDetail', 'lahan_kondisi_id');
     }
 }

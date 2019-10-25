@@ -22,7 +22,7 @@ class KonselingController extends Controller
     }
 
     public function store(Request $request){
-
+        
     }
 
 }

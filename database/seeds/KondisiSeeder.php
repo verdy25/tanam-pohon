@@ -49,7 +49,7 @@ class KondisiSeeder extends Seeder
             ]
         ]);
 
-        DB::table('lahan_ciri_lahan_kondisi')->insert([
+        DB::table('lahan_kondisi_detail')->insert([
             [
                 'lahan_kondisi_id' => 1,
                 'lahan_ciri_id' => 1
