@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Permintaan;
+use Illuminate\Support\Carbon;
 
 class HomeController extends Controller
 {
@@ -29,9 +31,22 @@ class HomeController extends Controller
             if (Auth::user()->role_id == 3) {
                 return view('index');
             } elseif (Auth::user()->role_id == 2) {
-                return view('persemaian.index');
+                $sekarang = Permintaan::whereDay('created_at', Carbon::now()->day)->count();
+                $bulan = Permintaan::whereMonth('created_at', Carbon::now()->month)->count();
+                $data = [];
+                for ($i=0; $i < 12; $i++) { 
+                    $data[$i] = Permintaan::whereMonth('created_at', $i+1)->count();
+                }
+                // return $data;
+                return view('persemaian.index', compact('data', 'sekarang', 'bulan'));
             } elseif (Auth::user()->role_id == 1) {
-                return view('admin.index');
+                $sekarang = Permintaan::whereDay('created_at', Carbon::now()->day)->count();
+                $bulan = Permintaan::whereMonth('created_at', Carbon::now()->month)->count();
+                $data = [];
+                for ($i=0; $i < 12; $i++) { 
+                    $data[$i] = Permintaan::whereMonth('created_at', $i+1)->count();
+                }
+                return view('admin.index',  compact('data', 'sekarang', 'bulan'));
             }
         } else {
             return view('index');

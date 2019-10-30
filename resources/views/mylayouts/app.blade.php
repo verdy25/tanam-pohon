@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>TanamPohon.com</title>
     <link rel="icon" href="{{asset('img/logo.png')}}">
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/8f68750497.js" crossorigin="anonymous"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
     <!-- animate CSS -->
@@ -53,7 +55,7 @@
                                     <a class="nav-link" href="#">About</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Informasi Bibit</a>
+                                    <a class="nav-link" href="/informasi">Informasi Bibit</a>
                                 </li>
                                 @guest
                                 @if (Route::has('register'))
@@ -75,7 +77,7 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="/minta">{{__('Permintaanku')}}</a>
+                                        <a class="dropdown-item" href="/minta">{{__('Pengajuan bibit')}}</a>
                                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
                                             {{ __('Logout') }}

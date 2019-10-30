@@ -31,4 +31,8 @@ class Permintaan extends Model
     public function statuspengajuan(){
         return $this->belongsTo('App\StatusPengajuan', 'status');
     }
+
+    public function bukti(){
+        return $this->hasMany('App\Bukti', 'permintaan_id');
+    }
 }

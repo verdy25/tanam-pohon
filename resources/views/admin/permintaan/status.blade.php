@@ -6,7 +6,7 @@
     <div class="container-fluid mt-3">
         <div class="col-lg-10 col-xl-10 col-md-10">
             <h4 class="text-dark mb-4">Ubah status permohonan</h4>
-            <form method="POST" action="/permintaan/{{$permintaan->id}}">
+            <form method="POST" action="/pengajuan/{{$permintaan->id}}">
                 @method('put')
                 @csrf
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -47,29 +47,25 @@
                         <td>{{$permintaan->luas_lahan}}</td>
                     </tr>
                     <tr>
-                        <td>KTP</td>
-                        <td><a href="{{ url('/ktp/'.$permintaan->ktp) }}" target="_blank">ktp</a></td>
-                    </tr>
-                    <tr>
-                        <td>SPPT PBB</td>
-                        <td><a href="{{ url('/spptpbb/'.$permintaan->spptpbb) }}" target="_blank">SPPT PBB</a></td>
-                    </tr>
-                    <tr>
-                        <td>Surat Permohonan</td>
-                        <td><a href="{{ url('/permohonan/'.$permintaan->permohonan) }}" target="_blank">Surat
-                                Permohonan</a></td>
+                        <td>Berkas</td>
+                        <td>
+                            <a href="{{ url('/ktp/'.$permintaan->ktp) }}" target="_blank" class="btn btn-primary"><span
+                                    class="fas fa-file-image"></span> KTP</a>
+                            <a href="{{ url('/spptpbb/'.$permintaan->spptpbb) }}" target="_blank"
+                                class="btn btn-secondary"><span class="fas fa-file-image"></span> SPPT PBB</a>
+                            <a href="{{ url('/permohonan/'.$permintaan->permohonan) }}" target="_blank"
+                                class="btn btn-warning"><span class="fas fa-file-image"></span> Surat Permohonan</a>
+                        </td>
                     </tr>
                     <tr>
                         <td>Status</td>
                         <td>
                             @foreach ($status as $s)
-                            @if ($s->id != 4)
                             <label class="radio-inline"><input type="radio" name="status" value="{{$s->id}}" @if($s->id
                                 === $permintaan->status)
                                 checked
                                 @endif
                                 > {{$s->status}}</label>
-                            @endif
                             @endforeach
                         </td>
                     </tr>
