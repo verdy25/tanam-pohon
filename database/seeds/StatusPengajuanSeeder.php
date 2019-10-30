@@ -26,5 +26,13 @@ class StatusPengajuanSeeder extends Seeder
         DB::table('status_pengajuans')->insert([
             'status' => 'bibit diterima'
         ]);
+
+        DB::table('status_pengajuans')->insert([
+            'status' => 'telah ditanam'
+        ]);
+
+        DB::table('status_pengajuans')->insert([
+            'status' => 'tidak ditanam'
+        ]);
     }
 }

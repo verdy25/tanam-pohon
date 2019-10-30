@@ -20,11 +20,18 @@ class BibitController extends Controller
     public function store(Request $request){
         $request->validate([
             'bibit' => 'required',
-            'kuota' => 'required|numeric'
+            'kuota' => 'required|numeric',
+            'panen' => 'required',
+            'deskripsi' => 'required'
         ]);
 
         Bibit::create($request->all());
         return redirect('/bibit')->with('status', 'berhasil ditambahkan');
+    }
+    
+    public function show($id){
+        $bibit = Bibit::findOrFail($id);
+        return view('persemaian.bibit.detail', compact('bibit'));
     }
 
     public function edit($id){
@@ -35,13 +42,17 @@ class BibitController extends Controller
     public function update(Request $request, $id){
         $request->validate([
             'bibit' => 'required',
-            'kuota' => 'required|numeric'
+            'kuota' => 'required|numeric',
+            'panen' => 'required',
+            'deskripsi' => 'required'
         ]);
 
         Bibit::where('id', $id)
             ->update([
                 'bibit' => $request->bibit,
-                'kuota' => $request->kuota
+                'kuota' => $request->kuota,
+                'panen' => $request->panen,
+                'deskripsi' => $request->deskripsi
             ]);
 
         return redirect('/bibit')->with('status', 'Data berhasil diperbarui');
@@ -50,5 +61,10 @@ class BibitController extends Controller
     public function destroy($id){
         Bibit::destroy($id);
         return redirect('/bibit')->with('status', 'Data telah dihapus');
+    }
+
+    public function informasi(){
+        $bibit = Bibit::all();
+        return view('user.bibit.index', compact('bibit'));
     }
 }

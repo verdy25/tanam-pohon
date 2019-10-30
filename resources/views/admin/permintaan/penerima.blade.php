@@ -6,7 +6,7 @@
 <div class="container-fluid" id="app">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Data pengajuan bibit</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Data penerima bibit</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -29,7 +29,7 @@
                             <td>{{$p->penanggungjawab}}</td>
                             <td>Bibit {{$p->bibit->bibit}} sebanyak {{$p->jumlah_bibit}}</td>
                             <td>
-                                <a href="/pengajuan/{{$p->id}}/status" class="btn 
+                                <a href="/penerima/{{$p->id}}/status" class="btn 
                                     @if ($p->status === 1)
                                     btn-secondary
                                     

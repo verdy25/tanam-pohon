@@ -6,7 +6,7 @@
 <div class="container-fluid" id="app">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Data permintaan</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Data pengajuan bibit</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -15,49 +15,39 @@
                         <tr>
                             <th>ID pengajuan</th>
                             <th>Nama</th>
-                            <th>Alamat</th>
-                            <th>NIK</th>
-                            <th>No handphone</th>
-                            <th>Bibit yang diminta</th>
-                            <th>Jumlah bibit</th>
-                            <th>Luas lahan</th>
-                            <th>KTP</th>
-                            <th>SPPT PBB</th>
-                            <th>Surat Permohonan</th>
-                            <th>Status pengajuan</th>
+                            <th>Mengajukan</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @if ($permintaan->count() == null)
+                            <td colspan="4" class="text-center">data kosong</td>
+                        @else
                         @foreach ($permintaan as $p)
                         <tr>
                             <td>{{$p->id}}</td>
                             <td>{{$p->penanggungjawab}}</td>
-                            <td>{{$p->alamat}}</td>
-                            <td>{{$p->nik}}</td>
-                            <td>{{$p->telp}}</td>
-                            <td>{{$p->bibit->bibit}}</td>
-                            <td>{{$p->jumlah_bibit}}</td>
-                            <td>{{$p->luas_lahan}}</td>
-                            <td><a href="{{ url('/ktp/'.$p->ktp) }}">ktp</a></td>
-                            <td><a href="{{ url('/spptpbb/'.$p->spptpbb) }}">SPPT PBB</a></td>
-                            <td><a href="{{ url('/permohonan/'.$p->permohonan) }}" target="_blank">Surat
-                                    Permohonan</a>
-                            </td>
+                            <td>Bibit {{$p->bibit->bibit}} sebanyak {{$p->jumlah_bibit}}</td>
                             <td>
-                                <a href="/permintaan/{{$p->id}}/status" class="btn 
-                                    @if ($p->id === 1)
-                                    btn-danger
-                                    @elseif($p->id === 2)
-                                    btn-success
-                                    @elseif($p->id === 3)
-                                    btn-warning
-                                    @else
+                                <a href="/pengajuan/{{$p->id}}/status" class="btn 
+                                    @if ($p->status === 1)
                                     btn-secondary
+                                    
+                                    @elseif($p->status === 2)
+                                    btn-danger
+                                    
+                                    @elseif($p->status === 3)
+                                    btn-primary
+                                    
+                                    @elseif($p->status === 4)
+                                    btn-success
                                     @endif
                                     ">{{$p->statuspengajuan->status}}</a>
                             </td>
                         </tr>
                         @endforeach
+                        @endif
+                       
                     </tbody>
                 </table>
             </div>
