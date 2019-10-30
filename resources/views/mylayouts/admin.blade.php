@@ -152,8 +152,7 @@
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">Bibit</a>
-                        <a class="collapse-item" href="#">Jadwal Panen</a>
+                        <a class="collapse-item" href="/bibit">Bibit</a>
                         <a class="collapse-item" href="#">Data petugas</a>
                     </div>
                 </div>

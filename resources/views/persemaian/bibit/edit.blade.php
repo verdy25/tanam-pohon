@@ -27,6 +27,26 @@
                     </div>
                     @enderror
                 </div>
+                <div class="form-group">
+                    <label for="panen">Tanggal panen</label>
+                    <input type="date" class="form-control @error('panen') is-invalid @enderror" id="panen"
+                        placeholder="Masukkan jumlah bibit" name="panen" value="{{$bibit->panen}}">
+                    @error('panen')
+                    <div class="invalid-feedback">
+                        {{$message}}
+                    </div>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="deskripsi">Deskripsi</label>
+                    <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" cols="30"
+                        rows="9" style="resize: none;">{{$bibit->deskripsi}}}</textarea>
+                    @error('deskripsi')
+                    <div class="invalid-feedback">
+                        {{$message}}
+                    </div>
+                    @enderror
+                </div>
                 <button type="submit" class="btn btn-primary">Simpan data</button>
             </form>
         </div>

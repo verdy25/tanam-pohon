@@ -20,7 +20,9 @@ class BibitController extends Controller
     public function store(Request $request){
         $request->validate([
             'bibit' => 'required',
-            'kuota' => 'required|numeric'
+            'kuota' => 'required|numeric',
+            'panen' => 'required|date',
+            'deskripsi' => 'required'
         ]);
 
         Bibit::create($request->all());
@@ -35,13 +37,17 @@ class BibitController extends Controller
     public function update(Request $request, $id){
         $request->validate([
             'bibit' => 'required',
-            'kuota' => 'required|numeric'
+            'kuota' => 'required|numeric',
+            'panen' => 'required|date',
+            'deskripsi' => 'required'
         ]);
 
         Bibit::where('id', $id)
             ->update([
                 'bibit' => $request->bibit,
-                'kuota' => $request->kuota
+                'kuota' => $request->kuota,
+                'panen' => $request->panen,
+                'deskripsi' => $request->deskripsi
             ]);
 
         return redirect('/bibit')->with('status', 'Data berhasil diperbarui');

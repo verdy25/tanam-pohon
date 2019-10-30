@@ -35,13 +35,14 @@ Route::group(['middleware' => 'web'], function () {
     });
 
     Route::group(['middleware' => ['auth', 'role:2']], function () {
-        Route::resource('/bibit', 'BibitController');
+        
     });
 
     Route::group(['middleware' => ['auth', 'role:1,2']], function () {
         Route::get('/permintaan', 'PermintaanController@admin');
         Route::get('/permintaan/{permintaan}/status', 'PermintaanController@edit_status');
         Route::put('/permintaan/{permintaan}', 'PermintaanController@update_status');
+        Route::resource('/bibit', 'BibitController');
     });
 
     Route::group(['middleware' => ['auth', 'role:1']], function () {
