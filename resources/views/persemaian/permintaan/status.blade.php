@@ -6,7 +6,7 @@
     <div class="container-fluid mt-3">
         <div class="col-lg-10 col-xl-10 col-md-10">
             <h4 class="text-dark mb-4">Ubah status permohonan</h4>
-            <form method="POST" action="/permintaan/{{$permintaan->id}}">
+            <form method="POST" action="/pengajuan/{{$permintaan->id}}">
                 @method('put')
                 @csrf
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

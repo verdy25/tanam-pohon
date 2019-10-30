@@ -20,6 +20,10 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('admin/css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <script src="{{asset('js/editor.js')}}"></script>
+    <link rel="stylesheet" href="{{asset('css/editor.css')}}">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
 </head>
 
@@ -32,7 +36,7 @@
 
             @if (auth()->user()->role_id == 2)
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -44,7 +48,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="/">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -59,15 +63,15 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/pengajuan">
                     <i class="fas fa-fw fa-users"></i>
-                    <span>Data</span></a>
+                    <span>Pengajuan bibit</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="/permintaan">
-                    <i class="fas fa-fw fa-hand-spock"></i>
-                    <span>Permintaan</span></a>
+                <a class="nav-link" href="/penerima">
+                    <i class="fas fa-archive"></i>
+                    <span>Penerima bibit</span></a>
             </li>
 
             <!-- Divider -->
@@ -75,22 +79,13 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Bibit
+                Informasi Bibit
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Data</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/bibit">Bibit</a>
-                        <a class="collapse-item" href="#">Jadwal Panen</a>
-                    </div>
-                </div>
+                <a class="nav-link" href="/bibit">
+                    <i class="fas fa-tree"></i>
+                    <span>Data</span></a>
             </li>
 
             <!-- Divider -->
@@ -111,7 +106,7 @@
 
             @if (auth()->user()->role_id == 1)
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -123,7 +118,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="/">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -138,8 +133,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="#">Data</a>
-                        <a class="collapse-item" href="/permintaan">Permintaan bibit</a>
-                        <a class="collapse-item" href="#">Penerima bibit</a>
+                        <a class="collapse-item" href="/pengajuan">Pengajuan bibit</a>
+                        <a class="collapse-item" href="/penerima">Penerima bibit</a>
                     </div>
                 </div>
             </li>

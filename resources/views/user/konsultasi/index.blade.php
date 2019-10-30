@@ -12,8 +12,17 @@
         <div class="row">
             <div class="col-10">
                 <h2 class="contact-title">Konsultasikan lahan anda</h2>
-                <h4 class="mb-3">Isilah kuesioner dibawah ini sesuai dengan keadaan lahan anda</h4>
-                <form class="form-contact contact_form" method="post">
+                @if ($konsultasi->count() > 0)
+                <a href="{{route('konseling.riwayat')}}" class="btn btn-info">Riwayat konseling</a>
+                @endif
+                <h4 class="mb-3 mt-3">Isilah kuesioner dibawah ini sesuai dengan keadaan lahan anda</h4>
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    Isi kuesioner minimal 1
+                </div>
+                @endif
+                <form class="form-contact contact_form" method="post" action="{{route('konseling.store')}}">
                     @csrf
                     <div class="row">
                         @foreach ($ciri as $c)
@@ -26,9 +35,8 @@
                         @endforeach
                     </div>
                     <div class="form-group mt-3">
-                        <button type="submit" value="upload" class="button button-contactForm btn_1">Submit</button>
+                        <button type="submit" class="button button-contactForm btn_1">Submit</button>
                     </div>
-
                 </form>
             </div>
         </div>

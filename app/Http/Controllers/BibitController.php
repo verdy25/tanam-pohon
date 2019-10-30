@@ -28,6 +28,11 @@ class BibitController extends Controller
         Bibit::create($request->all());
         return redirect('/bibit')->with('status', 'berhasil ditambahkan');
     }
+    
+    public function show($id){
+        $bibit = Bibit::findOrFail($id);
+        return view('persemaian.bibit.detail', compact('bibit'));
+    }
 
     public function edit($id){
         $bibit = Bibit::findOrFail($id);
@@ -56,5 +61,10 @@ class BibitController extends Controller
     public function destroy($id){
         Bibit::destroy($id);
         return redirect('/bibit')->with('status', 'Data telah dihapus');
+    }
+
+    public function informasi(){
+        $bibit = Bibit::all();
+        return view('user.bibit.index', compact('bibit'));
     }
 }

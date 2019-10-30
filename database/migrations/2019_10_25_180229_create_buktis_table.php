@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBibitsTable extends Migration
+class CreateBuktisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateBibitsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bibits', function (Blueprint $table) {
+        Schema::create('buktis', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('bibit');
-            $table->integer('kuota');
-            $table->date('panen');
-            $table->longText('deskripsi');
+            $table->unsignedBigInteger('permintaan_id');
+            $table->string('bukti');
             $table->timestamps();
+
+            $table->foreign('permintaan_id')->references('id')->on('permintaans');
         });
     }
 
@@ -30,6 +30,6 @@ class CreateBibitsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bibits');
+        Schema::dropIfExists('buktis');
     }
 }

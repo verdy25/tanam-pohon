@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Permintaan;
 use App\Bibit;
+use App\Bukti;
 use App\StatusPengajuan;
 use Illuminate\Support\Facades\Auth;
+use File;
 
 class PermintaanController extends Controller
 {
@@ -26,10 +28,22 @@ class PermintaanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function individu()
     {
         $bibits = Bibit::all();
-        return view('user.minta.buat', compact('bibits'));
+        return view('user.minta.individu', compact('bibits'));
+    }
+
+    public function kelompok()
+    {
+        $bibits = Bibit::all();
+        return view('user.minta.kelompok', compact('bibits'));
+    }
+
+    public function instansi()
+    {
+        $bibits = Bibit::all();
+        return view('user.minta.instansi', compact('bibits'));
     }
 
     /**
@@ -41,13 +55,13 @@ class PermintaanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'penanggungjawab' => 'required',
+            'nama' => 'required',
             'alamat' => 'required',
             'nik' => 'required',
             'telp' => 'required',
             'tujuan' => 'required',
             'bibit_id' => 'required',
-            'jumlah_bibit' => 'required|numeric',
+            'jumlah_bibit' => 'required|numeric|max:1500',
             'luas_lahan' => 'required|numeric',
             'latitude' => 'required',
             'longitude' => 'required',
@@ -55,6 +69,7 @@ class PermintaanController extends Controller
             'spptpbb' => 'required|mimes:pdf,jpeg,png,jpg|max:2048',
             'permohonan' => 'required|mimes:pdf,jpeg,png,jpg|max:2048'
         ]);
+
         // menyimpan data file yang diupload ke variabel $file
         $ktp = $request->file('ktp');
         $spptpbb = $request->file('spptpbb');
@@ -66,16 +81,16 @@ class PermintaanController extends Controller
         $tujuann_permohonan = 'permohonan';
 
         // nama file
-        $ktp_file = time() . "_" . $ktp->getClientOriginalName();
-        $spptpbb_file = time() . "_" . $spptpbb->getClientOriginalName();
-        $permohonan_file = time() . "_" . $permohonan->getClientOriginalName();
+        $ktp_file = time() .  $ktp->getClientOriginalName();
+        $spptpbb_file = time() .  $spptpbb->getClientOriginalName();
+        $permohonan_file = time() .  $permohonan->getClientOriginalName();
 
         $ktp->move($tujuan_ktp, $ktp_file);
         $spptpbb->move($tujuan_spptpbb, $spptpbb_file);
         $permohonan->move($tujuann_permohonan, $permohonan_file);
 
         Permintaan::create([
-            'penanggungjawab' => $request->penanggungjawab,
+            'penanggungjawab' => $request->nama,
             'user_id' => $request->user()->id,
             'alamat' => $request->alamat,
             'nik' => $request->nik,
@@ -95,6 +110,39 @@ class PermintaanController extends Controller
         return redirect('/minta')->with('status', 'Permintaan anda telah dibuat, silahkan menunggu untuk dikonfirmasi');
     }
 
+
+    public function upload_bukti(Request $request, $id)
+    {
+        $request->validate([
+            'bukti' => 'required|mimes:jpeg,png,jpg|max:2048'
+        ]);
+
+        $bukti = $request->file('bukti');
+        $folder = 'bukti';
+        $filename = time() . $bukti->getClientOriginalName();
+        $bukti->move($folder, $filename);
+
+        $jumlah = Bukti::where('permintaan_id', $id)->count();
+
+        if ($jumlah < 4) {
+            Bukti::create([
+                'bukti' => $filename,
+                'permintaan_id' => $request->permintaan_id
+            ]);
+            return back()->with(['success' => 'Upload berhasil']);
+        } else {
+            return back()->with(['info' => 'maksimal upload 4 foto']);
+        }
+    }
+
+    public function hapus_bukti($id){
+        $bukti = Bukti::where('id',$id)->first();
+        File::delete('bukti/'.$bukti->file);
+     
+        // hapus data
+        Bukti::where('id',$id)->delete();
+        return back()->with(['success' => 'Bukti berhasil dihapus']);
+    }
     /**
      * Display the specified resource.
      *
@@ -104,7 +152,8 @@ class PermintaanController extends Controller
     public function show($id)
     {
         $permintaan = Permintaan::findOrFail($id);
-        return view('user.minta.detail', compact('permintaan'));
+        $bukti = Bukti::where('permintaan_id', $id)->get();
+        return view('user.minta.detail', compact('permintaan', 'bukti'));
     }
 
     /**
@@ -127,7 +176,7 @@ class PermintaanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Permintaan::where('id', $id)->update([]);
     }
 
     /**
@@ -142,16 +191,14 @@ class PermintaanController extends Controller
     }
 
     //admin
-    public function admin()
+    public function pengajuan()
     {
         if (auth()->user()->role_id == 1) {
-            $permintaan = Permintaan::all();
-            $status = StatusPengajuan::all();
-            return view('admin.permintaan.index', compact('permintaan', 'status'));
+            $permintaan = Permintaan::whereIn('status', [1, 2, 3])->get();
+            return view('admin.permintaan.index', compact('permintaan'));
         } elseif (auth()->user()->role_id == 2) {
-            $permintaan = Permintaan::whereIn('status', [3, 4])->get();
-            $status = StatusPengajuan::all();
-            return view('persemaian.permintaan.index', compact('permintaan', 'status'));
+            $permintaan = Permintaan::whereIn('status', [3])->get();
+            return view('persemaian.permintaan.index', compact('permintaan'));
         }
     }
 
@@ -159,11 +206,11 @@ class PermintaanController extends Controller
     {
         if (auth()->user()->role_id == 1) {
             $permintaan = Permintaan::findOrFail($id);
-            $status = StatusPengajuan::all();
+            $status = StatusPengajuan::find([1, 2, 3]);
             return view('admin.permintaan.status', compact('permintaan', 'status'));
         } elseif (auth()->user()->role_id == 2) {
             $permintaan = Permintaan::findOrFail($id);
-            $status = StatusPengajuan::all();
+            $status = StatusPengajuan::find([3, 4]);
             return view('persemaian.permintaan.status', compact('permintaan', 'status'));
         }
     }
@@ -181,7 +228,7 @@ class PermintaanController extends Controller
                 'status' => $request->status
             ]);
 
-            return redirect('/permintaan');
+            return redirect('/pengajuan');
         } elseif (auth()->user()->role_id == 2) {
             $request->validate([
                 'status' => 'required'
@@ -191,7 +238,35 @@ class PermintaanController extends Controller
                 'status' => $request->status
             ]);
 
-            return redirect('/permintaan');
+            return redirect('/pengajuan');
         }
+    }
+
+
+    public function penerima()
+    {
+        $permintaan = Permintaan::whereIn('status', [4, 5, 6])->get();
+        return view('admin.permintaan.penerima', compact('permintaan'));
+    }
+
+    public function edit_penerimaan($id)
+    {
+        $permintaan = Permintaan::findOrFail($id);
+        $status = StatusPengajuan::find([4, 5, 6]);
+        return view('admin.permintaan.status', compact('permintaan', 'status'));
+    }
+
+    public function update_penerimaan(Request $request, $id)
+    {
+
+        $request->validate([
+            'status' => 'required'
+        ]);
+
+        Permintaan::where('id', $id)->update([
+            'status' => $request->status
+        ]);
+
+        return redirect('/pengajuan');
     }
 }
