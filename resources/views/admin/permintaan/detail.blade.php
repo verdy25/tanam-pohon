@@ -10,14 +10,11 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <form method="POST" action="/pengajuan/{{$permintaan->id}}">
-                    @method('put')
-                    @csrf
+                <form method="GET">
                     <table class="table table-borderless" id="dataTable" width="100%">
                         <tr>
                             <td>Akun</td>
-                            <td><a href="{{route('profile.detail', $profile->id)}}" class="badge badge-primary"
-                                    target="_blank">{{$profile->nama}}</a></td>
+                            <td><a href="{{route('profile.detail', $profile->id)}}" class="badge badge-primary" target="_blank">{{$profile->nama}}</a></td>
                         </tr>
                         <tr>
                             <td>Nama</td>
@@ -80,26 +77,12 @@
                             </td>
                         </tr>
                         @endif
-
+                        @if (auth()->user()->role_id == 1)
                         <tr>
                             <td>Status</td>
                             <td>
-                                @foreach ($status as $s)
-                                <label class="radio-inline"><input type="radio" name="status" value="{{$s->id}}"
-                                        @if($s->id
-                                    === $permintaan->status)
-                                    checked
-                                    @elseif($permintaan->status == 2)
-                                    disabled
-                                    @endif
-                                    > {{$s->status}}</label>
-                                @endforeach
+                                {{$permintaan->statuspengajuan->status}}
                             </td>
-                        </tr>
-                        @if ($permintaan->status != 2)
-                        <tr>
-                            <td></td>
-                            <td><button type="submit" class="btn btn-primary">Ubah status</button></td>
                         </tr>
                         @endif
                     </table>

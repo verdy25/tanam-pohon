@@ -29,10 +29,10 @@
                             <tr>
                                 <td>{{$k->created_at}}</td>
                                 <td>{{$k->kondisi->kondisi}}</td>
-                                <td><button data-toggle="modal" data-target="#detailKondisi"
+                                <td><button data-toggle="modal" data-target="#detailKondisi{{$k->id}}"
                                         class="badge badge-primary">detail</button></td>
-
-                                <div class="modal fade" id="detailKondisi" tabindex="-1" role="dialog"
+                                        
+                                <div class="modal fade" id="detailKondisi{{$k->id}}" tabindex="-1" role="dialog"
                                     aria-labelledby="detailKondisi" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -54,7 +54,6 @@
                             </tr>
                             @endforeach
                             @endif
-
                         </tbody>
                     </table>
                 </div>

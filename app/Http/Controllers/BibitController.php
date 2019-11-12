@@ -21,7 +21,7 @@ class BibitController extends Controller
         $request->validate([
             'bibit' => 'required',
             'kuota' => 'required|numeric',
-            'panen' => 'required|date',
+            'panen' => 'required|date|after:today',
             'deskripsi' => 'required'
         ]);
 
@@ -43,7 +43,7 @@ class BibitController extends Controller
         $request->validate([
             'bibit' => 'required',
             'kuota' => 'required|numeric',
-            'panen' => 'required|date',
+            'panen' => 'required|date|after:today',
             'deskripsi' => 'required'
         ]);
 
@@ -64,7 +64,7 @@ class BibitController extends Controller
     }
 
     public function informasi(){
-        $bibit = Bibit::all();
+        $bibit = Bibit::orderBy('bibit', 'asc')->get();
         return view('user.bibit.index', compact('bibit'));
     }
 }

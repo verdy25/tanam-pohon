@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>TanamPohon.com</title>
-
     <link rel="icon" href="{{asset('img/logo.png')}}">
     <!-- Custom fonts for this template-->
     <link href="{{ asset('admin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -20,11 +16,9 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('admin/css/sb-admin-2.min.css')}}" rel="stylesheet">
-    <script src="{{asset('js/editor.js')}}"></script>
-    <link rel="stylesheet" href="{{asset('css/editor.css')}}">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-
+    {{-- <script src="{{asset('js/editor.js')}}"></script>
+    <link rel="stylesheet" href="{{asset('css/editor.css')}}"> --}}
+    <script src="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}"></script>
 </head>
 
 <body id="page-top">
@@ -132,7 +126,7 @@
                 <div id="collapsePages2" class="collapse" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">Data</a>
+                        <a class="collapse-item" href="{{route('masyarakat')}}">Data</a>
                         <a class="collapse-item" href="/pengajuan">Pengajuan bibit</a>
                         <a class="collapse-item" href="/penerima">Penerima bibit</a>
                     </div>
@@ -460,6 +454,13 @@
     <script src="{{ asset('admin/js/demo/chart-area-demo.js')}}"></script>
     <script src="{{ asset('admin/js/demo/chart-pie-demo.js')}}"></script>
     {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
+
+    <!-- Page level plugins -->
+    <script src="{{ asset('admin/vendor/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{ asset('admin/js/demo/datatables-demo.js')}}"></script>
 
 </body>
 

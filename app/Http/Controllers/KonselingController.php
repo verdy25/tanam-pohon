@@ -48,6 +48,8 @@ class KonselingController extends Controller
             }
         }
 
+        // dd($nilai);
+
         $atas = array();
         foreach ($kondisi as $k) {
             $id = LahanKondisiDetail::where('lahan_kondisi_id', $k->id)->get('id');
@@ -55,6 +57,8 @@ class KonselingController extends Controller
                 $atas[$k->id] = collect($nilai[$k->id])->sum();
             }
         }
+
+        // dd($atas);
 
         $bawah = array();
         foreach ($kondisi as $k) {
@@ -65,6 +69,8 @@ class KonselingController extends Controller
             }
         }
 
+        // dd($bawah);
+
         $hasil = array();
         foreach ($kondisi as $k) {
             $id = LahanKondisiDetail::where('lahan_kondisi_id', $k->id)->get('id');
@@ -72,8 +78,12 @@ class KonselingController extends Controller
                 $hasil[$k->id] =  $atas[$k->id] / collect($bawah[$k->id])->sum();
             }
         }
-        // return $hasil;
+        
+        dd($hasil);
+
         $sort = collect($hasil)->sort()->last();
+
+        // dd($sort);
 
         foreach ($kondisi as $k) {
             $id = LahanKondisiDetail::where('lahan_kondisi_id', $k->id)->get('id');
@@ -84,10 +94,12 @@ class KonselingController extends Controller
             }
         }
 
-        Konsultasi::create([
-            'user_id' => Auth::id(),
-            'kondisi_id' => $idResult
-        ]);
+        // dd($idResult);
+
+        // Konsultasi::create([
+        //     'user_id' => Auth::id(),
+        //     'kondisi_id' => $idResult
+        // ]);
 
         return redirect('/konseling/riwayat');
     }

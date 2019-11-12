@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Permintaan extends Model
 {
+    protected $table = 'permintaans';
     protected $fillable = [
         'penanggungjawab',
         'alamat',
@@ -24,7 +25,7 @@ class Permintaan extends Model
         'permohonan'
     ];
 
-    public function bibit(){
+    public function bibit(){    
         return $this->belongsTo('App\Bibit', 'bibit_id');
     }
 
@@ -34,5 +35,9 @@ class Permintaan extends Model
 
     public function bukti(){
         return $this->hasMany('App\Bukti', 'permintaan_id');
+    }
+
+    public function masyarakat(){
+        return $this->belongsTo('App\Masyarakat', 'user_id');
     }
 }

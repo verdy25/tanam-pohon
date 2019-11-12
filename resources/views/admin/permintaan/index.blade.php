@@ -40,7 +40,14 @@
                                     btn-primary
                                     
                                     @elseif($p->status === 4)
+                                    btn-warning
+
+                                    @elseif($p->status === 5)
                                     btn-success
+
+                                    @elseif($p->status === 6)
+                                    btn-danger
+
                                     @endif
                                     ">{{$p->statuspengajuan->status}}</a>
                             </td>

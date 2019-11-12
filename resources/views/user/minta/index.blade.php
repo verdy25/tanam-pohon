@@ -13,6 +13,12 @@
             </div>
             <div class="col-lg-12">
                 <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                    @if ($message = Session::get('success'))
+                    <div class="alert alert-success alert-block">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>{{ $message }}</strong>
+                    </div>
+                    @endif
                     <table class="table dataTable my-0" id="dataTable">
                         <thead>
                             <tr>
@@ -25,18 +31,19 @@
                         </thead>
                         <tbody>
                             @if ($permintaan->count() == 0)
-                                <td colspan="4" class="text-center">Data kosong</td>
+                            <td colspan="4" class="text-center">Data kosong</td>
                             @else
                             @foreach ($permintaan as $p)
                             <tr>
                                 <td>{{$p->id}}</td>
                                 <td>{{$p->penanggungjawab}}</td>
                                 <td>Minta {{$p->bibit->bibit}} sebanyak {{$p->jumlah_bibit}} buah</td>
-                                <td><span
-                                        class="badge @if($p->status === 1) badge-secondary 
+                                <td><span class="badge @if($p->status === 1) badge-secondary 
                                         @elseif($p->status === 2) badge-danger 
                                         @elseif($p->status === 3) badge-primary 
                                         @elseif($p->status === 4) badge-success 
+                                        @elseif($p->status === 5) badge-success 
+                                        @elseif($p->status === 6) badge-danger
                                         @endif">{{$p->statuspengajuan->status}}</span>
                                 </td>
                                 <td><a class="badge badge-info" href="{{route('minta.show', $p->id)}}">

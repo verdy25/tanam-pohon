@@ -5,7 +5,8 @@
 @endsection
 
 @section('content')
-
+<link href="{{ asset('leaflet/leaflet.css') }}" rel="stylesheet">
+<script type="text/javascript" src="{{ asset('leaflet/leaflet-src.js') }}"></script>
 <!-- ================ contact section start ================= -->
 <section class="contact-section section_padding">
     <div class="container">
@@ -84,14 +85,21 @@
                                 value="{{$permintaan->longitude}}" disabled>
                         </div>
                     </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <div id="map" style="width:100%; height:300px"></div>
+                        </div>
+                    </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <ul>
                                 <li><strong>Berkas</strong></li>
                                 <li><a href="{{ url('/ktp/'.$permintaan->ktp) }}" target="_blank"
-                                        class="btn btn-primary mb-2"><span class="fas fa-file-image"></span> KTP</a></li>
+                                        class="btn btn-primary mb-2"><span class="fas fa-file-image"></span> KTP</a>
+                                </li>
                                 <li><a href="{{ url('/spptpbb/'.$permintaan->spptpbb) }}" target="_blank"
-                                        class="btn btn-primary mb-2"><span class="fas fa-file-image"></span> SPPT PBB</a>
+                                        class="btn btn-primary mb-2"><span class="fas fa-file-image"></span> SPPT
+                                        PBB</a>
                                 </li>
                                 <li><a href="{{ url('/permohonan/'.$permintaan->permohonan) }}" target="_blank"
                                         class="btn btn-primary mb-2"><span class="fas fa-file-image"></span> Surat
@@ -205,4 +213,25 @@
         opacity: 1;
     }
 </style>
+<script>
+    var maxBounds = L.latLngBounds(
+            L.latLng(-7.468461, 112.427748), //Southwest
+            L.latLng(-8.758753, 114.593636)  //Northeast
+        );
+
+        var lat =  document.getElementById("latitude").value
+        var lng =  document.getElementById("longitude").value
+    
+        var options = {
+            center: [lat, lng],
+            zoom: 13,
+            maxBounds: maxBounds
+        }
+        var map = L.map('map', options).fitBounds(maxBounds)
+        L.marker([lat, lng]).addTo(map);
+    
+        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+</script>
 @endsection

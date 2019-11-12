@@ -5,6 +5,8 @@
 @endsection
 
 @section('content')
+<link href="{{ asset('leaflet/leaflet.css') }}" rel="stylesheet">
+<script type="text/javascript" src="{{ asset('leaflet/leaflet-src.js') }}"></script>
 <!-- ================ contact section start ================= -->
 <section class="contact-section section_padding">
     <div class="container">
@@ -91,6 +93,12 @@
                     {{$message}}
                 </div>
                 @enderror
+                @if ($message = Session::get('warning'))
+                <div class="alert alert-warning alert-block">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>{{ $message }}</strong>
+                </div>
+                @endif
                 <form class="form-contact contact_form" method="post" action="/minta" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
@@ -128,36 +136,38 @@
                             </div>
                         </div>
                         <div class="col-12">
-                                <div class="form-group">
-                                    <label for="tujuan">Tujuan</label>
-                                    <textarea class="form-control w-100" name="tujuan" id="tujuan" cols="30" rows="9"
-                                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Masukkan tujuan anda'"
-                                        placeholder='Masukkan tujuan anda'
-                                        maxlength="191">{{old('tujuan')}}</textarea>
-                                </div>
+                            <div class="form-group">
+                                <label for="tujuan">Tujuan</label>
+                                <textarea class="form-control w-100" name="tujuan" id="tujuan" cols="30" rows="9"
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Masukkan tujuan anda'"
+                                    placeholder='Masukkan tujuan anda' maxlength="191">{{old('tujuan')}}</textarea>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="bibit_id">Bibit</label>
-                                    <select name="bibit_id" id="bibit_id" class="form-control">
-                                        @foreach ($bibits as $bibit)
-                                            @if (old('bibit_id') ==  $bibit->id)
-                                            <option value="{{ $bibit->id }}" selected>{{ $bibit->bibit }}</option>
-                                            @else
-                                            <option value="{{$bibit->id}}">
-                                                    {{$bibit->bibit}}
-                                                </option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="bibit_id">Bibit</label>
+                                <select name="bibit_id" id="bibit_id" class="form-control">
+                                    @foreach ($bibits as $bibit)
+                                    @if (old('bibit_id') == $bibit->id)
+                                    <option value="{{ $bibit->id }}" selected>{{ $bibit->bibit }}</option>
+                                    @else
+                                    <option value="{{$bibit->id}}">
+                                        {{$bibit->bibit}}
+                                    </option>
+                                    @endif
+                                    @endforeach
+                                </select>
+                                <p id="kuota"></p>
                             </div>
+                        </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="jumlah_bibit">Jumlah bibit</label>
                                 <input class="form-control" name="jumlah_bibit" id="jumlah_bibit" type="text"
-                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Masukkan jumlah bibit maksimal 1500'"
+                                    onfocus="this.placeholder = ''"
+                                    onblur="this.placeholder = 'Masukkan jumlah bibit maksimal 1500'"
                                     placeholder='Masukkan jumlah bibit' value="{{old('jumlah_bibit')}}">
+                                <p>Maksimal hanya bisa mengambil 1500</p>
                             </div>
                         </div>
                         <div class="col-sm-12">
@@ -171,46 +181,44 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="latitude">Latitude <a
-                                        href="https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DAndroid&hl=id"
-                                        data-toggle="latitude" class="fas fa-question-circle"
-                                        target="_blank"></a></label>
+                                <label for="latitude">Latitude</label>
                                 <input class="form-control" name="latitude" id="latitude" type="text"
                                     onfocus="this.placeholder = ''" onblur="this.placeholder = 'Masukkan latitude'"
-                                    placeholder='Masukkan latitude' value="{{old('latitude')}}">
+                                    placeholder='Masukkan latitude' value="{{old('latitude')}}" readonly>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="longitude">Longitude <a
-                                        href="https://support.google.com/maps/answer/18539?co=GENIE.Platform%3DAndroid&hl=id"
-                                        class="fas fa-question-circle" target="_blank"></a></label>
+                                <label for="longitude">Longitude</label>
                                 <input class="form-control" name="longitude" id="longitude" type="text"
                                     onfocus="this.placeholder = ''" onblur="this.placeholder = 'Masukkan longitude'"
-                                    placeholder='Masukkan longitude' value="{{old('longitude')}}">
+                                    placeholder='Masukkan longitude' value="{{old('longitude')}}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <div id="map" style="width: 100%; height:300px"></div>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="ktp">Scan KTP</label>
                                 <input class="form-control-file" name="ktp" id="ktp" type="file">
-                                @error('ktp')
-                                <div class="invalid-feedback">
-                                    {{$message}}
-                                </div>
-                                @enderror
+                                <p>Maksimal file berukuran 2 Mb</p>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="spptpbb">Scan SPPT PBB</label>
                                 <input class="form-control-file" name="spptpbb" id="spptpbb" type="file">
+                                <p>Maksimal file berukuran 2 Mb</p>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="permohonan">Scan Surat Permohonan</label>
                                 <input class="form-control-file" name="permohonan" id="permohonan" type="file">
+                                <p>Maksimal file berukuran 2 Mb</p>
                             </div>
                         </div>
                     </div>
@@ -245,4 +253,52 @@
         </div>
     </div>
 </section>
+<script>
+    $('#kuota').hide();
+    
+        var bibit = {!! json_encode($bibits->toArray(), JSON_HEX_TAG) !!};
+        $('#bibit_id').change(function() {
+            $('#kuota').show()
+            $('#kuota').text('Tersedia: '+bibit[$(bibit_id).val()].kuota)
+        });
+        
+</script>
+<script>
+    var maxBounds = L.latLngBounds(
+            L.latLng(-7.468461, 112.427748), //Southwest
+            L.latLng(-8.758753, 114.593636)  //Northeast
+        );
+    
+        var options = {
+            center: [-8.184486, 113.668076],
+            zoom: 13,
+            maxBounds: maxBounds
+        }
+        var map = L.map('map', options).fitBounds(maxBounds)
+    
+        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+    
+        var marker;
+        var latitude;
+        var longitude;
+    
+        map.on('click',
+            function (e) {
+                var coord = e.latlng.toString().split(',');
+                var lat = coord[0].split('(');
+                var lng = coord[1].split(')');
+                // alert("You clicked the map at LAT: " + lat[1] + " and LONG: " + lng[0]);
+                // L.marker(e.latlng).addTo(map);
+                if (marker) {
+                    map.removeLayer(marker);
+                }
+                marker = new L.Marker(e.latlng).addTo(map);
+                latitude = lat[1]
+                longitude = lng[0]
+                document.getElementById("latitude").value = latitude;
+                document.getElementById("longitude").value = longitude
+            });
+</script>
 @endsection

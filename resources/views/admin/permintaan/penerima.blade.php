@@ -30,17 +30,14 @@
                             <td>Bibit {{$p->bibit->bibit}} sebanyak {{$p->jumlah_bibit}}</td>
                             <td>
                                 <a href="/penerima/{{$p->id}}/status" class="btn 
-                                    @if ($p->status === 1)
-                                    btn-secondary
-                                    
-                                    @elseif($p->status === 2)
-                                    btn-danger
-                                    
-                                    @elseif($p->status === 3)
+                                    @if ($p->status === 4)
                                     btn-primary
-                                    
-                                    @elseif($p->status === 4)
+
+                                    @elseif($p->status === 5)
                                     btn-success
+
+                                    @elseif($p->status === 6)
+                                    btn-danger
                                     @endif
                                     ">{{$p->statuspengajuan->status}}</a>
                             </td>
