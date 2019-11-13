@@ -38,6 +38,8 @@ Run the database migrations
 You can use seed
 
     php artisan db:seed
+    
+    php artisan laravolt:indonesia:seed
 
 Start the local development server
 
