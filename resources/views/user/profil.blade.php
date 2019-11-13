@@ -125,6 +125,7 @@
                             <div class="form-group">
                                 <label for="provinsi">Provinsi</label>
                                 <select name="provinsi" id="provinsi" class="form-control">
+                                    <option>Pilih provinsi</option>
                                     @foreach ($provinces as $key => $p)
                                     @if ($profile->provinsi_id == $key)
                                     <option value="{{$key}}" selected>{{ $p }}</option>
@@ -141,7 +142,10 @@
                             <div class="form-group">
                                 <label for="kota">Kota</label>
                                 <select name="kota" id="kota" class="form-control">
-                                    <option value="{{$profile->kabupaten_id}}" selected>{{$profile->kabupaten->name}}</option>
+                                    @if ($profile->kabupaten_id != null)
+                                    <option value="{{$profile->kabupaten_id}}" selected>{{$profile->kabupaten->name}}
+                                    </option>
+                                    @endif
                                 </select>
                             </div>
                         </div>
@@ -149,7 +153,10 @@
                             <div class="form-group">
                                 <label for="kecamatan">Kecamatan</label>
                                 <select name="kecamatan" id="kecamatan" class="form-control">
-                                        <option value="{{$profile->kecamatan_id}}" selected>{{$profile->kecamatan->name}}</option>
+                                    @if ($profile->kecamatan_id != null)
+                                    <option value="{{$profile->kecamatan_id}}" selected>{{$profile->kecamatan->name}}
+                                    </option>
+                                    @endif
                                 </select>
                             </div>
                         </div>

@@ -22,9 +22,9 @@ class CreateMasyarakatsTable extends Migration
             $table->string('tempat_lahir')->nullable();
             $table->date('tanggal_lahir')->nullable();
             $table->string('hp')->nullable()->unique();
-            $table->unsignedBigInteger('provinsi_id');
-            $table->unsignedBigInteger('kabupaten_id');
-            $table->unsignedBigInteger('kecamatan_id');
+            $table->unsignedBigInteger('provinsi_id')->nullable();
+            $table->unsignedBigInteger('kabupaten_id')->nullable();
+            $table->unsignedBigInteger('kecamatan_id')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

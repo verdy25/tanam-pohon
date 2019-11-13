@@ -13,8 +13,8 @@ class ProfilController extends Controller
 {
     public function index()
     {
-        $data = Masyarakat::where('user_id', Auth::user()->id)->get();
-        $id = $data[0]->id;
+        $data = Masyarakat::where('user_id', Auth::user()->id)->first();
+        $id = $data->id;
         $profile = Masyarakat::find($id);
         $profile->hp = substr($profile->hp, 3);
 

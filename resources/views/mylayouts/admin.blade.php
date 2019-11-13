@@ -151,7 +151,7 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages3"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Kosultasi</span>
+                    <span>Konsultasi</span>
                 </a>
                 <div id="collapsePages3" class="collapse" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">

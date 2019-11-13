@@ -124,13 +124,23 @@
                                             @endif">bibit diterima - {{$permintaan->statuspengajuan->status}}</span>
                                     @endif
                                 </li>
+                                <li>
+                                    @if ($pengambilan->count() != null)
+                                    <p class="badge badge-success">
+                                        Pengambilan : {{$pengambilan->tanggal_pengambilan}}
+                                    </p><br>
+                                    <p class="badge badge-warning">
+                                        Batas : {{$pengambilan->tanggal_batas}}
+                                    </p>
+                                    @endif
+                                </li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </form>
-            @if ($permintaan->status == 4)
             <div class="col-4">
+                @if ($permintaan->status == 4)
                 @if ($message = Session::get('success'))
                 <div class="alert alert-success alert-block">
                     <button type="button" class="close" data-dismiss="alert">×</button>
@@ -175,8 +185,8 @@
                         @endforeach
                     </div>
                 </div>
+                @endif
             </div>
-            @endif
             @if ($permintaan->status == 5)
 
             @endif

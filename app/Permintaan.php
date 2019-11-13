@@ -40,4 +40,8 @@ class Permintaan extends Model
     public function masyarakat(){
         return $this->belongsTo('App\Masyarakat', 'user_id');
     }
+
+    public function pengambilan(){
+        return $this->hasOne('App\Pengambilan', 'permintaan_id');
+    }
 }

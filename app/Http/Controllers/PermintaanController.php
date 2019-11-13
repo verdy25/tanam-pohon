@@ -7,7 +7,9 @@ use App\Permintaan;
 use App\Bibit;
 use App\Bukti;
 use App\Masyarakat;
+use App\Pengambilan;
 use App\StatusPengajuan;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use File;
 
@@ -164,7 +166,15 @@ class PermintaanController extends Controller
     {
         $permintaan = Permintaan::findOrFail($id);
         $bukti = Bukti::where('permintaan_id', $id)->get();
-        return view('user.minta.detail', compact('permintaan', 'bukti'));
+        $pengambilan = Pengambilan::where('permintaan_id', $permintaan->id)->get();
+
+        if($pengambilan->count() != null){
+            $pengambilan = $permintaan->pengambilan->where('permintaan_id', $permintaan->id)->first();
+            return view('user.minta.detail', compact('permintaan', 'bukti', 'pengambilan'));
+        }else{
+            return view('user.minta.detail', compact('permintaan', 'bukti', 'pengambilan'));
+        }
+        
     }
 
     //admin
@@ -209,6 +219,19 @@ class PermintaanController extends Controller
 
             $permintaan = Permintaan::find($id);
             $bibit = $permintaan->bibit()->find($permintaan->bibit_id);
+
+            if (Carbon::today() > $bibit->panen) {
+                $pengambilan = Carbon::today()->addDays(3);
+            }else{
+                $pengambilan = $bibit->panen;
+            }
+            $batas = Carbon::parse($pengambilan)->addDays(7);
+
+            Pengambilan::create([
+                'permintaan_id' => $permintaan->id,
+                'tanggal_pengambilan' => $pengambilan,
+                'tanggal_batas' => $batas
+            ]);
 
             Permintaan::where('id', $id)->update([
                 'status' => $request->status

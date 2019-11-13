@@ -91,7 +91,8 @@ class RegisterController extends Controller
         Masyarakat::create([
             'user_id' => $user->id,
             'nama' => $data['name'],
-            'email' => $data['email']
+            'email' => $data['email'],
         ]);
+
     }
 }
