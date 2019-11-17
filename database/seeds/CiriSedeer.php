@@ -15,142 +15,142 @@ class CiriSedeer extends Seeder
             [
                 [
                     'ciri' => 'Mempunyai topografi atau permukaan hampir datar',
-                    'pertanyaan' => 'Permukaan lahan anda hampir datar (tidak miring)',
+                    'kategori_id' => null,
                     'bobot' => 5
                 ],
                 [
                     'ciri' => 'Ancaman erosi kecil',
-                    'pertanyaan' => 'Erosi tidak pernah terjadi',
+                    'kategori_id' => 1,
                     'bobot' => 3
                 ],
                 [
                     'ciri' => 'Kedalaman tanah 0-30 cm',
-                    'pertanyaan' => 'Kedalaman tanah 0-30 cm',
+                    'kategori_id' => null,
                     'bobot' => 3
                 ],
                 [
                     'ciri' => 'Pengolahan tanah baik',
-                    'pertanyaan' => 'Pengolahan tanah baik',
+                    'kategori_id' => 6,
                     'bobot' => 3
                 ],
                 [
                     'ciri' => 'Kapasitas menahan air baik',
-                    'pertanyaan' => 'Tanah dapat menahan air dengan baik',
+                    'kategori_id' => 4,
                     'bobot' => 1
                 ],
                 [
                     'ciri' => 'Memiliki tanah yang subur',
-                    'pertanyaan' => 'Tanah subur',
+                    'kategori_id' => null,
                     'bobot' => 3
                 ],
                 [
                     'ciri' => 'Tidak terancam banjir',
-                    'pertanyaan' => 'Banjir tidak pernah terjadi',
+                    'kategori_id' => 5,
                     'bobot' => 5
                 ],
                 [
                     'ciri' => 'Keadaan iklim yang sesuai',
-                    'pertanyaan' => 'Iklim normal',
+                    'kategori_id' => 2,
                     'bobot' => 1
                 ],
                 [
                     'ciri' => 'Lereng landai, kemiringan ≤ 30%',
-                    'pertanyaan' => 'Kemiringan lahan ≤ 30%',
+                    'kategori_id' => 3,
                     'bobot' => 5
                 ],
                 [
                     'ciri' => 'Ancaman erosi sedang',
-                    'pertanyaan' => 'Erosi jarang terjadi',
+                    'kategori_id' => 1,
                     'bobot' => 3
                 ],
                 [
                     'ciri' => 'Pengolahan tanah kurang baik',
-                    'pertanyaan' => 'Pengolahan tanah kurang baik',
+                    'kategori_id' => 6,
                     'bobot' => 3
                 ],
                 [
                     'ciri' => 'Pernah terkena banjir',
-                    'pertanyaan' => 'Banjir pernah terjadi, tetapi tidak sering',
+                    'kategori_id' => 5,
                     'bobot' => 5
                 ],
                 [
                     'ciri' => 'Kelebihan air',
-                    'pertanyaan' => 'Kelebihan air',
+                    'kategori_id' => null,
                     'bobot' => 3
                 ],
                 [
                     'ciri' => 'Keadaan iklim kurang sesuai',
-                    'pertanyaan' => 'Iklim normal, kadang tidak normal',
+                    'kategori_id' => 2,
                     'bobot' => 1
                 ],
                 [
                     'ciri' => 'Lereng miring atau bergelombang, kemiringan ≤50%',
-                    'pertanyaan' => 'Kemiringan lahan ≤ 50%',
+                    'kategori_id' => 3,
                     'bobot' => 5
                 ],
                 [
                     'ciri' => 'Ancaman erosi agak berat',
-                    'pertanyaan' => 'Erosi sering terjadi',
+                    'kategori_id' => 1,
                     'bobot' => 3
                 ],
                 [
                     'ciri' => 'Sering mengalami banjir',
-                    'pertanyaan' => 'Banjir sering terjadi',
+                    'kategori_id' => 5,
                     'bobot' => 5
                 ],
                 [
                     'ciri' => 'Memiliki tanah yang basah',
-                    'pertanyaan' => 'Tanah basah',
+                    'kategori_id' => null,
                     'bobot' => 3
                 ],
                 [
                     'ciri' => 'Kapasitas menahan air rendah',
-                    'pertanyaan' => 'Tanah kurang bisa menyerap air',
+                    'kategori_id' => 4,
                     'bobot' => 1
                 ],
                 [
                     'ciri' => 'Mengandung natrium rendah',
-                    'pertanyaan' => 'Lahan mengandung natrium rendah',
+                    'kategori_id' => 7,
                     'bobot' => 3
                 ],
                 [
                     'ciri' => 'Keadaan iklim tidak sesuai',
-                    'pertanyaan' => 'Iklim tidak normal',
+                    'kategori_id' => 2,
                     'bobot' => 1
                 ],
                 [
                     'ciri' => 'Lereng curam atau berbukit, kemiringan ≥ 50%',
-                    'pertanyaan' => 'Kemiringan lahan ≥ 50%',
+                    'kategori_id' => 3,
                     'bobot' => 5
                 ],
                 [
                     'ciri' => 'Ancaman erosi berat',
-                    'pertanyaan' => 'Erosi sangat sering terjadi',
+                    'kategori_id' => 1,
                     'bobot' => 3
                 ],
                 [
                     'ciri' => 'Lahan tergenang air',
-                    'pertanyaan' => 'Lahan tergenang air',
+                    'kategori_id' => null,
                     'bobot' => 5
                 ],
                 [
                     'ciri' => 'Lahan berbatu',
-                    'pertanyaan' => 'Lahan berbatu',
+                    'kategori_id' => null,
                     'bobot' => 5
                 ],
                 [
                     'ciri' => 'Mengandung natrium tinggi',
-                    'pertanyaan' => 'Lahan mengandung natrium tinggi',
+                    'kategori_id' => 7,
                     'bobot' => 3
                 ],
                 [
                     'ciri' => 'Ancaman erosi sangat berat (erosi parit)',
-                    'pertanyaan' => 'Pernah terjadi erosi parit',
+                    'kategori_id' => 1,
                     'bobot' => 5
                 ],
                 [
                     'ciri' => 'Daerah perakaran sangat dangkal',
-                    'pertanyaan' => 'Daerah perakaran sangat dangkal',
+                    'kategori_id' => null,
                     'bobot' => 5
                 ]
             ]

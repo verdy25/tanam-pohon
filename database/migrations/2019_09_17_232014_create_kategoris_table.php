@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLahanCirisTable extends Migration
+class CreateKategorisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateLahanCirisTable extends Migration
      */
     public function up()
     {
-        Schema::create('lahan_ciris', function (Blueprint $table) {
+        Schema::create('kategoris', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('ciri');
-            $table->unsignedBigInteger('kategori_id')->nullable();
-            $table->integer('bobot');
-            $table->foreign('kategori_id')->references('id')->on('kategoris');
+            $table->string('kategori');
+            $table->timestamps();
         });
     }
 
@@ -29,6 +27,6 @@ class CreateLahanCirisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lahan_ciris');
+        Schema::dropIfExists('kategoris');
     }
 }
