@@ -21,6 +21,7 @@ Route::get('/informasi', 'BibitController@informasi');
 
 Route::group(['middleware' => 'web'], function () {
     Route::get('/', 'HomeController@index');
+    Route::get('/about', 'HomeController@about');
 
     Route::group(['middleware' => ['auth', 'role:3']], function () {
         Route::get('/minta', 'PermintaanController@index');

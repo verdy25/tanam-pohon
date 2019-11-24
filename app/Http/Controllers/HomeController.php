@@ -45,28 +45,29 @@ class HomeController extends Controller
             }
         }
 
+        $sekarang = Permintaan::whereDay('created_at', Carbon::now()->day)->count();
+        $bulan = Permintaan::whereMonth('created_at', Carbon::now()->month)->count();
+        $pending = Permintaan::where('status', 1)->count();
+        $bibit_diterima = Permintaan::where('status', 4)->sum('jumlah_bibit');
+        $data = [];
+        for ($i = 0; $i < 12; $i++) {
+            $data[$i] = Permintaan::whereMonth('created_at', $i + 1)->count();
+        }
+
         if (Auth::check()) {
             if (Auth::user()->role_id == 3) {
                 return view('index');
             } elseif (Auth::user()->role_id == 2) {
-                $sekarang = Permintaan::whereDay('created_at', Carbon::now()->day)->count();
-                $bulan = Permintaan::whereMonth('created_at', Carbon::now()->month)->count();
-                $data = [];
-                for ($i = 0; $i < 12; $i++) {
-                    $data[$i] = Permintaan::whereMonth('created_at', $i + 1)->count();
-                }
-                return view('persemaian.index', compact('data', 'sekarang', 'bulan'));
+                return view('persemaian.index', compact('data', 'sekarang', 'bulan', 'pending', 'bibit_diterima'));
             } elseif (Auth::user()->role_id == 1) {
-                $sekarang = Permintaan::whereDay('created_at', Carbon::now()->day)->count();
-                $bulan = Permintaan::whereMonth('created_at', Carbon::now()->month)->count();
-                $data = [];
-                for ($i = 0; $i < 12; $i++) {
-                    $data[$i] = Permintaan::whereMonth('created_at', $i + 1)->count();
-                }
-                return view('admin.index',  compact('data', 'sekarang', 'bulan'));
+                return view('admin.index',  compact('data', 'sekarang', 'bulan', 'pending', 'bibit_diterima'));
             }
         } else {
             return view('index');
         }
+    }
+
+    public function about(){
+        return view('about');
     }
 }

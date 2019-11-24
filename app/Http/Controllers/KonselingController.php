@@ -79,7 +79,7 @@ class KonselingController extends Controller
             }
         }
         
-        dd($hasil);
+        // dd($hasil);
 
         $sort = collect($hasil)->sort()->last();
 
@@ -96,10 +96,10 @@ class KonselingController extends Controller
 
         // dd($idResult);
 
-        // Konsultasi::create([
-        //     'user_id' => Auth::id(),
-        //     'kondisi_id' => $idResult
-        // ]);
+        Konsultasi::create([
+            'user_id' => Auth::id(),
+            'kondisi_id' => $idResult
+        ]);
 
         return redirect('/konseling/riwayat');
     }
