@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Kategori;
 use Illuminate\Http\Request;
 use App\LahanCiri;
 
@@ -25,7 +26,8 @@ class LahanCiriController extends Controller
      */
     public function create()
     {
-        return view('admin.lahan.ciri.create');
+        $kategoris = Kategori::all();
+        return view('admin.lahan.ciri.create', compact('kategoris'));
     }
 
     /**
@@ -38,13 +40,13 @@ class LahanCiriController extends Controller
     {
         $request->validate([
             'ciri' => 'required',
-            'pertanyaan' => 'required',
+            'kategori' => 'nullable',
             'bobot' => 'required'
         ]);
 
         LahanCiri::create([
             'ciri' => $request->ciri,
-            'pertanyaan' => $request->pertanyaan,
+            'kategori_id' => $request->kategori,
             'bobot' => $request->bobot
         ]);
 
@@ -71,7 +73,8 @@ class LahanCiriController extends Controller
     public function edit($id)
     {
         $ciri = LahanCiri::findOrFail($id);
-        return view('admin.lahan.ciri.edit', compact('ciri'));
+        $kategoris = Kategori::all();
+        return view('admin.lahan.ciri.edit', compact('ciri', 'kategoris'));
     }
 
     /**
@@ -85,13 +88,13 @@ class LahanCiriController extends Controller
     {
         $request->validate([
             'ciri' => 'required',
-            'pertanyaan' => 'required',
+            'kategori' => 'nullable',
             'bobot' => 'required'
         ]);
 
         LahanCiri::where('id', $id)->update([
             'ciri' => $request->ciri,
-            'pertanyaan' => $request->pertanyaan,
+            'kategori_id' => $request->kategori,
             'bobot' => $request->bobot
         ]);
 

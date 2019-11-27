@@ -58,7 +58,7 @@ class PermintaanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
+            'nama' => 'required|regex:/^[a-zA-Z ]+$/u',
             'alamat' => 'required',
             'nik' => 'required|digits:16',
             'telp' => 'required|regex:/^[0-9]+$/|between:10,12',

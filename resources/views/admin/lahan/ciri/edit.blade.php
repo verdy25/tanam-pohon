@@ -18,9 +18,20 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="pertanyaan">Pertanyaan</label>
-                    <input type="text" class="form-control @error('pertanyaan') is-invalid @enderror" id="pertanyaan"
-                        placeholder="Masukkan pertanyaan" name="pertanyaan" value="{{$ciri->pertanyaan}}">
+                    <label for="kategori">Kategori</label>
+                    <select name="kategori" id="kategori" class="form-control">
+                        <option value="">Pilih kategori</option>
+                        @foreach ($kategoris as $k)
+                        @if ($k->id == $ciri->kategori_id)
+                        <option value="{{$k->id}}">
+                            {{$k->kategori}}
+                        </option>
+                        @endif
+                        <option value="{{$k->id}}">
+                            {{$k->kategori}}
+                        </option>
+                        @endforeach
+                    </select>
                     @error('pertanyaan')
                     <div class="invalid-feedback">
                         {{$message}}

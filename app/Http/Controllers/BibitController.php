@@ -20,7 +20,7 @@ class BibitController extends Controller
     public function store(Request $request){
         $request->validate([
             'bibit' => 'required',
-            'kuota' => 'required|numeric',
+            'kuota' => 'required|numeric|min:0',
             'panen' => 'required|date|after:today',
             'deskripsi' => 'required'
         ]);
@@ -42,7 +42,7 @@ class BibitController extends Controller
     public function update(Request $request, $id){
         $request->validate([
             'bibit' => 'required',
-            'kuota' => 'required|numeric',
+            'kuota' => 'required|numeric|min:0',
             'panen' => 'required|date|after:today',
             'deskripsi' => 'required'
         ]);

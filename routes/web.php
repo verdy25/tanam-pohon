@@ -22,6 +22,9 @@ Route::get('/informasi', 'BibitController@informasi');
 Route::group(['middleware' => 'web'], function () {
     Route::get('/', 'HomeController@index');
     Route::get('/about', 'HomeController@about');
+    Route::get('city', 'ProfilController@getCity')->name('city');
+    Route::get('district', 'ProfilController@getDistrict')->name('district');
+    Route::get('search-city', 'ProfilController@searchCity')->name('search.city');
 
     Route::group(['middleware' => ['auth', 'role:3']], function () {
         Route::get('/minta', 'PermintaanController@index');
@@ -35,9 +38,6 @@ Route::group(['middleware' => 'web'], function () {
 
         Route::get('/profile', 'ProfilController@index')->name('profile');
         Route::put('/profile', 'ProfilController@update')->name('update.profile');
-        Route::get('city', 'ProfilController@getCity')->name('city');
-        Route::get('district', 'ProfilController@getDistrict')->name('district');
-        Route::get('search-city', 'ProfilController@searchCity')->name('search.city');
 
         Route::prefix('konseling')->group(function () {
             Route::get('/', 'KonselingController@index');
@@ -63,6 +63,9 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/masyarakat/{id}', 'ProfilController@detail')->name('masyarakat.detail');
 
         Route::get('/profile/{id}', 'ProfilController@detail')->name('profile.detail');
+
+        Route::get('/profil', 'ProfilController@profiladmin')->name('profil.admin');
+        Route::put('/profil', 'ProfilController@updateprofiladmin')->name('update.profil.admin');
     });
 
     Route::group(['middleware' => ['auth', 'role:1']], function () {

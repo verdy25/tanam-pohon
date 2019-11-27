@@ -44,5 +44,31 @@ class UserSeeder extends Seeder
             'kabupaten_id' => 3520,
             'kecamatan_id' => 3520060
         ]);
+
+        DB::table('masyarakats')->insert([
+            'nama' => 'Admin',
+            'email' => 'admin@tapo.com',
+            'alamat' => 'Jln. danau toba 47A',
+            'user_id' => 1,
+            'tempat_lahir' => 'Magetan',
+            'tanggal_lahir' => '1998-06-26',
+            'hp' => '+6289560167328',
+            'provinsi_id' => 35,
+            'kabupaten_id' => 3520,
+            'kecamatan_id' => 3520060
+        ]);
+
+        DB::table('masyarakats')->insert([
+            'nama' => 'semai',
+            'email' => 'semai@tapo.com',
+            'alamat' => 'Jln. danau toba 47A',
+            'user_id' => 2,
+            'tempat_lahir' => 'Magetan',
+            'tanggal_lahir' => '1998-06-26',
+            'hp' => '+628956016628',
+            'provinsi_id' => 35,
+            'kabupaten_id' => 3520,
+            'kecamatan_id' => 3520060
+        ]);
     }
 }
