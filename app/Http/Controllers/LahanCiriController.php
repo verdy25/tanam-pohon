@@ -112,4 +112,16 @@ class LahanCiriController extends Controller
         LahanCiri::destroy($id);
         return redirect('/lahan/ciri')->with('status', 'ciri-ciri berhasil dihapus');
     }
+
+    public function store_kategori(Request $request){
+        $request->validate([
+            'kategori' => 'required|regex:/^[a-zA-Z]+$/u|unique:kategoris,kategori'
+        ]);
+
+        Kategori::create([
+            'kategori' => $request->kategori
+        ]);
+
+        return redirect()->route('lahan.ciri.create')->with('status', 'berhasil menambah kategori');
+    }
 }

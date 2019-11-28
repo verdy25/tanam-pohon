@@ -71,12 +71,13 @@ Route::group(['middleware' => 'web'], function () {
     Route::group(['middleware' => ['auth', 'role:1']], function () {
 
         Route::prefix('lahan')->name('lahan.')->group(function () {
-
             Route::resource('/ciri', 'LahanCiriController')->except('show');
             Route::resource('/kondisi', 'LahanKondisiController')->except('show');
             Route::resource('/', 'LahanKondisiDetailController',  ['parameters' => [
                 '' => 'lahan'
             ]]);
+            Route::post('/kategori', 'LahanCiriController@store_kategori')->name('add.kategori');
         });
+
     });
 });
