@@ -62,7 +62,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/masyarakat', 'ProfilController@admin')->name('masyarakat');
         Route::get('/masyarakat/{id}', 'ProfilController@detail')->name('masyarakat.detail');
 
-        Route::get('/profile/{id}', 'ProfilController@detail')->name('profile.detail');
+        // Route::get('/profile/{id}', 'ProfilController@detail')->name('profile.detail');
 
         Route::get('/profil', 'ProfilController@profiladmin')->name('profil.admin');
         Route::put('/profil', 'ProfilController@updateprofiladmin')->name('update.profil.admin');

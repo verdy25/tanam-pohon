@@ -16,7 +16,7 @@
                     <table class="table table-borderless" id="dataTable" width="100%">
                         <tr>
                             <td>Akun</td>
-                            <td><a href="{{route('profile.detail', $profile->id)}}" class="badge badge-primary"
+                            <td><a href="{{route('masyarakat.detail', $profile->id)}}" class="badge badge-primary"
                                     target="_blank">{{$profile->nama}}</a></td>
                         </tr>
                         <tr>

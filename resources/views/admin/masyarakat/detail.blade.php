@@ -33,21 +33,34 @@
                         </tr>
                         <tr>
                             <td>Kecamatan</td>
+                            @if ($masyarakat->kecamatan_id == null)
+                            <td></td>
+                            @else
                             <td>: {{$masyarakat->kecamatan->name}}</td>
+                            @endif
                         </tr>
                         <tr>
                             <td>Kabupaten</td>
+                            @if ($masyarakat->kabupaten_id == null)
+                            <td></td>
+                            @else
                             <td>: {{$masyarakat->kabupaten->name}}</td>
+                            @endif
                         </tr>
                         <tr>
                             <td>Provinsi</td>
+                            @if ($masyarakat->provinsi_id == null)
+                            <td></td>
+                            @else
                             <td>: {{$masyarakat->provinsi->name}}</td>
+                            @endif
                         </tr>
                         <tr>
                             <td>Riwayat Permintaan</td>
                             <td>@foreach ($permintaan as $p)
-                            <a href="{{route('permintaan', $p->id)}}" class="badge badge-primary" target="_blank">#{{$p->id}}</a>
-                            @endforeach</td>
+                                <a href="{{route('permintaan', $p->id)}}" class="badge badge-primary"
+                                    target="_blank">#{{$p->id}}</a>
+                                @endforeach</td>
                         </tr>
                     </table>
                 </form>
